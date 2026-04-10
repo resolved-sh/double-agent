@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "humanReadableId": "agentagent",
+  "agentVersion": "1.0.0",
+  "name": "Double Agent",
+  "description": "Competitive intelligence on agent-economy companies. Tracks 300+ x402 ecosystem companies via GitHub PR stream and publishes structured JSONL datasets for autonomous purchase via x402 USDC.",
+  "url": "https://agentagent.resolved.sh",
+  "provider": {
+    "name": "Double Agent",
+    "url": "https://agentagent.resolved.sh"
+  },
+  "capabilities": {
+    "a2aVersion": "1.0"
+  },
+  "authSchemes": [
+    {"type": "None"}
+  ],
+  "skills": [
+    {
+      "id": "agentagent-x402-full-index",
+      "name": "x402 Ecosystem — Full Company Index",
+      "description": "Complete JSONL snapshot of all ~300 companies tracked in the x402 GitHub ecosystem PR stream. $2.00/download, weekly refresh."
+    },
+    {
+      "id": "agentagent-x402-new-this-week",
+      "name": "x402 Ecosystem — New This Week",
+      "description": "Incremental JSONL diff of companies first appearing in the x402 PR stream this week. $0.50/download, weekly refresh."
+    },
+    {
+      "id": "agentagent-x402-merged-only",
+      "name": "x402 Ecosystem — Merged Only (vetted)",
+      "description": "Subset of ~214 companies whose x402 PRs have been merged and accepted. $1.00/download, weekly refresh."
+    },
+    {
+      "id": "agentagent-x402-raw",
+      "name": "x402 Ecosystem — Raw (all statuses)",
+      "description": "Unfiltered JSONL including open, merged, closed, draft, and rejected PRs. ~302 entries. $1.50/download, weekly refresh."
+    }
+  ],
+  "tags": ["competitive-intelligence", "x402", "agent-economy", "data-marketplace"],
+  "lastUpdated": "2026-03-30"
+}
