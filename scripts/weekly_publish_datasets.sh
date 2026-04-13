@@ -2,22 +2,111 @@
 set -e
 
 # T09: Weekly dataset re-upload to resolved.sh
-# Runs after daily scraper on Mondays at 04:00 UTC
-# Uploads updated flat JSONL files with correct pricing
+# Replaces existing dataset files with fresh versions from flat_* sources
+# Maintains 4 files under the 5-file limit
 
 cd "$(dirname "$0")/.."
 
-# Load .env to get RESOLVED_SH_API_KEY
+# Load .env
 if [ -f .env ]; then
   export $(grep -v '^#' .env | xargs)
 fi
 
 RESOURCE_ID="e8592c18-9052-47b5-bfa3-bfe699193d0e"
+API_KEY="$RESOLVED_SH_API_KEY"
 
-echo "Uploading weekly dataset updates to resolved.sh (resource: $RESOURCE_ID)"
+echo "=== Weekly Dataset Upload ==="
+echo "Resource: $RESOURCE_ID"
+echo ""
 
-python3 scripts/resolved_sh.py upload "$RESOURCE_ID" public/flat_x402_ecosystem_full_index.jsonl 2.00 --query-price 0.10 --download-price 2.00
-python3 scripts/resolved_sh.py upload "$RESOURCE_ID" public/flat_x402_ecosystem_merged_only.jsonl 1.00 --query-price 0.05 --download-price 1.00
-python3 scripts/resolved_sh.py upload "$RESOURCE_ID" public/flat_x402_ecosystem_new_this_week.jsonl 0.50 --query-price 0.05 --download-price 0.50
+# Helper: delete file by filename (looks up UUID first)
+delete_file() {
+  local filename="$1"
+  echo "→ Checking if '$filename' exists on resolved.sh..."
+  file_id=$(python3 -c "
+import requests, os, sys
+api_key = os.environ['RESOLVED_SH_API_KEY']
+r = requests.get('https://resolved.sh/listing/${RESOURCE_ID}/data', headers={'Authorization': f'Bearer {api_key}'})
+files = r.json().get('files', [])
+for f in files:
+    if f['filename'] == '${filename}':
+        print(f['id'])
+        sys.exit(0)
+print('NOT_FOUND')
+" 2>/dev/null)
+  
+  if [ "$file_id" = "NOT_FOUND" ]; then
+    echo "  Not found — skipping delete"
+    return 0
+  fi
+  
+  echo "  Found file ID: $file_id — deleting..."
+  python3 -c "
+import requests, os
+api_key = os.environ['RESOLVED_SH_API_KEY']
+r = requests.delete('https://resolved.sh/listing/${RESOURCE_ID}/data/${file_id}', headers={'Authorization': f'Bearer {api_key}'})
+print('  Delete status:', r.status_code)
+if r.status_code not in (200, 204):
+    print('  ERROR:', r.text[:200])
+    exit(1)
+"
+  echo "  Deleted."
+}
 
-echo "Weekly dataset upload complete."
+# Helper: upload flat_ file as target filename
+upload_file() {
+  local flat_file="$1"   # e.g. flat_x402_ecosystem_merged_only.jsonl
+  local target_name="$2" # e.g. x402_ecosystem_merged_only.jsonl
+  local query_price="$3"
+  local download_price="$4"
+  
+  echo "→ Uploading $flat_file as $target_name..."
+  
+  python3 -c "
+import requests, os
+api_key = os.environ['RESOLVED_SH_API_KEY']
+resource = '${RESOURCE_ID}'
+with open('public/${flat_file}', 'rb') as f:
+    content = f.read()
+headers = {'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/jsonl'}
+params = {
+    'price_usdc': '${download_price}',
+    'query_price_usdc': '${query_price}',
+    'download_price_usdc': '${download_price}'
+}
+r = requests.put(f'https://resolved.sh/listing/{resource}/data/${target_name}', headers=headers, params=params, data=content)
+print(f'  Status: {r.status_code}')
+if r.status_code not in (200, 201):
+    print('  ERROR:', r.text[:300])
+    exit(1)
+result = r.json()
+print(f'  ✓ Uploaded {result.get(\"filename\")} — {result.get(\"size_bytes\")} bytes, queryable={result.get(\"queryable\")}')
+"
+}
+
+# Process each dataset
+echo "--- Updating full_index ---"
+delete_file "x402_ecosystem_full_index.jsonl"
+upload_file "flat_x402_ecosystem_full_index.jsonl" "x402_ecosystem_full_index.jsonl" "0.10" "2.00"
+
+echo ""
+echo "--- Updating merged_only ---"
+delete_file "x402_ecosystem_merged_only.jsonl"
+upload_file "flat_x402_ecosystem_merged_only.jsonl" "x402_ecosystem_merged_only.jsonl" "0.05" "1.00"
+
+echo ""
+echo "--- Updating new_this_week ---"
+delete_file "x402_ecosystem_new_this_week.jsonl"
+upload_file "flat_x402_ecosystem_new_this_week.jsonl" "x402_ecosystem_new_this_week.jsonl" "0.05" "0.50"
+
+echo ""
+echo "=== Weekly dataset upload complete ==="
+echo ""
+echo "Current files on resolved.sh:"
+python3 -c "
+import requests, os
+r = requests.get('https://resolved.sh/listing/${RESOURCE_ID}/data', headers={'Authorization': f\"Bearer {os.environ['RESOLVED_SH_API_KEY']}\"})
+files = r.json().get('files', [])
+for f in files:
+    print(f\"  [{f['filename']}] {f['size_bytes']} bytes, queryable={f.get('queryable')}, query=\${f.get('effective_query_price')}, download=\${f.get('effective_download_price')}\")
+"
