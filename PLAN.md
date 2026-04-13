@@ -36,7 +36,7 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 | Blog post: x402-ecosystem-launch | ✅ Live | Free |
 | Blog post: x402-agent-signals-april-2026 | ✅ Live | $1.50 |
 | A2A agent card | ✅ Live | 4 skills defined |
-| Automation (blog + research + email + scraper + datasets) | ✅ Running | 6 cron jobs active: daily scrape, weekly digest, weekly research, weekly datasets upload, Twitter draft gen, email check |
+| Automation (blog + research + email + scraper + datasets) | ✅ Running | 6 cron jobs active: daily scrape (03:00 UTC), weekly digest (Mon 10am JST), weekly research (Mon 9am JST), weekly datasets upload (Mon 04:00 UTC), Twitter draft gen (Tue 11am JST), email check (wkdays 09:00/21:00 JST) |
 | Weekly blog schedule | ✅ Done | Cron job created: da-weekly-blog (Mon 10am JST) |
 | Marketing distribution | ❌ Not done | Tweet thread + HN post drafted but not posted |
 | Launch post (2026-03-30) | ❌ Not published | Written, never pushed to resolved.sh |
@@ -184,7 +184,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
 | T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Daily scraper created: scripts/scrape_ecosystem.py; scheduled as `da-daily-scrape` (03:00 UTC). Test run: 51 new PRs found, full index now 362 entries. Uses GitHub API, enriches domains with agent-card/llms.txt checks. |
-| T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[x]` | Weekly upload script created: scripts/weekly_publish_datasets.sh; scheduled as `da-weekly-datasets` (Mon 04:00 UTC). Uploads full_index (query $0.10, dl $2.00), merged_only (q $0.05, dl $1.00), new_this_week (q $0.05, dl $0.50) with correct Content-Type: application/jsonl. |
+| T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[x]` | Weekly upload script: scripts/weekly_publish_datasets.sh; scheduled as `da-weekly-datasets` (Mon 04:00 UTC). Uses delete-then-upload to respect 5-file limit. Verified working: all 3 queryable datasets updated correctly (full_index 362 rows, merged_only 112, new_this_week 23). Pricing correct: full_index q=$0.10/dl=$2.00, merged_only q=$0.05/dl=$1.00, new_this_week q=$0.05/dl=$0.50. |
 | T13 | Emit Pulse events on data updates | agent | `[ ]` | POST /{subdomain}/events, type=data_upload |
 | T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
 | T15 | Publish pending launch post | agent | `[ ]` | python3 scripts/resolved_sh.py publish-post ... |
