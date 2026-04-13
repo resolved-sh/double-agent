@@ -1,0 +1,1 @@
+- need to update the front page, make sure clear to use agentagent.sh instead of the vanity subdomain
