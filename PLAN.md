@@ -177,17 +177,17 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | B11 | Set up weekly digest scheduled task (Mon 10am JST) | agent | `[x]` | Cron job created: da-weekly-blog; verified working |
 | B12 | First paid post ($1.50) — "x402 Agent Signals: Who's Actually Ready?" | agent | `[x]` | Live at /posts/x402-agent-signals-april-2026 |
 | B13 | Set up weekly paid research scheduled task (Mon 9am JST) | agent | `[x]` | Cron job created: da-weekly-research; verified working |
-| B14 | Publish pending launch post (posts/2026-03-30-launch.md) | agent | `[ ]` | Written, never pushed to resolved.sh |
+| B14 | Publish pending launch post (posts/2026-03-30-launch.md) | agent | `[x]` | Already live as x402-ecosystem-launch (published 2026-04-01 via 2026-04-01-x402-ecosystem-launch.md — same content) |
 
 ### Phase 2 — Automation
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Daily scraper created: scripts/scrape_ecosystem.py; scheduled as `da-daily-scrape` (03:00 UTC). Test run: 51 new PRs found, full index now 362 entries. Uses GitHub API, enriches domains with agent-card/llms.txt checks. |
+| T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Fixed 2026-04-13: created cron/da-daily-scrape.md skill + Paperclip routine b4f00e56 (daily 03:00 UTC). Manual run: 3 new PRs, 365 total. |
 | T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[x]` | Weekly upload script: scripts/weekly_publish_datasets.sh; scheduled as `da-weekly-datasets` (Mon 04:00 UTC). Uses delete-then-upload to respect 5-file limit. Verified working: all 3 queryable datasets updated correctly (full_index 362 rows, merged_only 112, new_this_week 23). Pricing correct: full_index q=$0.10/dl=$2.00, merged_only q=$0.05/dl=$1.00, new_this_week q=$0.05/dl=$0.50. |
 | T13 | Emit Pulse events on data updates | agent | `[ ]` | POST /{subdomain}/events, type=data_upload |
 | T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
-| T15 | Publish pending launch post | agent | `[ ]` | python3 scripts/resolved_sh.py publish-post ... |
+| T15 | Publish pending launch post | agent | `[x]` | Already live — same content as B14 (x402-ecosystem-launch) |
 | T20 | Set up email check cron job (AgentMail, weekdays every 12h) | agent | `[x]` | Created da-check-email; tested successfully (4 messages found) |
 
 ### Phase 3 — Deepen
