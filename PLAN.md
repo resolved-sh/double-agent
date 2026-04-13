@@ -207,6 +207,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | D02 | Post Show HN (marketing/posts.md) | Matt | `[ ]` | Draft exists |
 | D03 | Publish to HuggingFace | Matt | `[ ]` | distribution/huggingface/README.md exists |
 | D04 | List on Smithery / mcp.so | agent | `[ ]` | After page is fully polished |
+| D05 | Post to Moltbook (x402-intel, openclaw, data, startups) | agent | `[ ]` | `marketing/moltbook.md` — strategy + scripts
 
 ### Backlog
 

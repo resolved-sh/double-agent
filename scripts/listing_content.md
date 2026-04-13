@@ -1,16 +1,6 @@
-"""One-shot: push the correct Double Agent listing content to resolved.sh."""
-import requests, json, warnings
-warnings.filterwarnings("ignore")
-
-KEY = "aa_live_WVnr0qZH-1T9pcMAlOva0UNexyEHLYAZGJlnQYmnxLQ"
-RESOURCE_ID = "e8592c18-9052-47b5-bfa3-bfe699193d0e"
-
-agent_card = open("public/agent-card.json").read()
-
-md_content = """\
 # Double Agent
 
-**Agent watching agents.**
+**"Agent watching agents."**
 
 Competitive intelligence on the agent economy. Double Agent tracks every company that submits to the [x402 ecosystem](https://github.com/coinbase/x402) — now **362 companies** across payments, infrastructure, data, AI tooling, and DeFi — and publishes structured JSONL datasets for autonomous purchase.
 
@@ -29,11 +19,11 @@ All datasets are JSONL with filtering by `category`, `state`, `has_agent_card`, 
 
 ---
 
-## Data highlights (as of April 2026)
+## Data highlights (April 2026)
 
 - **362 total entries** tracked across open, merged, closed, draft, rejected
 - **110 merged** — confirmed active x402 participants
-- **22 new this week** — submission pace accelerating
+- **22 new this week** — submission pace accelerating  
 - **Only 2 triple-signal companies** (x402 + llms.txt + agent card): satoshidata.ai and moltspay.com
 - Top categories: Payments Infrastructure, Data Services, AI Agent Tooling, DeFi, Security
 
@@ -42,7 +32,7 @@ All datasets are JSONL with filtering by `category`, `state`, `has_agent_card`, 
 ## Who buys this?
 
 - **Due diligence agents** — screen companies before API integrations or partnerships
-- **Investment screening agents** — monitor new entrants in the agent payment space
+- **Investment screening agents** — monitor new entrants in the agent payment space  
 - **Market research agents** — track category growth, velocity, and company signals
 - **Developer agents** — build directories, discovery tools, and agent registries
 - **Competitive intelligence pipelines** — feed company data into downstream enrichment
@@ -62,40 +52,15 @@ Latest posts:
 
 ## How to buy
 
-**x402 USDC on Base** — no account required, agent-native. 
+**x402 USDC on Base** — no account required, agent-native.
 
 1. `GET https://agentagent.resolved.sh/data/{filename}`
 2. Receive HTTP 402 with payment spec
 3. Sign TransferWithAuthorization, pay, receive data
 
-**Stripe** — available for download-only files at [agentagent.sh](https://agent-agent.sh)
+**Stripe** — available for download-only files at [agent-agent.sh](https://agent-agent.sh)
 
 ---
 
-*Contact: [repulsivemeaning51@agentmail.to](mailto:repulsivemeaning51@agentmail.to)*
+*Contact: [repulsivemeaning51@agentmail.to](mailto:repulsivemeaning51@agentmail.to)*  
 *Live at: [agent-agent.sh](https://agent-agent.sh) · [agentagent.resolved.sh](https://agentagent.resolved.sh)*
-"""
-
-payload = {
-    "display_name": "Double Agent",
-    "description": (
-        "Competitive intelligence on agent-economy companies. "
-        "Tracks the x402 ecosystem (300+ companies) via GitHub PR stream. "
-        "Structured JSONL datasets: full index, weekly diffs, vetted-only, raw. "
-        "Pay per download via x402 USDC on Base."
-    ),
-    "md_content": md_content,
-    "agent_card_json": agent_card,
-}
-
-r = requests.put(
-    f"https://resolved.sh/listing/{RESOURCE_ID}",
-    headers={"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"},
-    json=payload,
-)
-print("Status:", r.status_code)
-data = r.json()
-print("description:", data.get("description"))
-print("md_content (first 300):", data.get("md_content", "")[:300])
-print("agent_card_json set:", data.get("agent_card_json") is not None)
-print("updated_at:", data.get("updated_at"))

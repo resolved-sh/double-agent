@@ -1,42 +1,42 @@
 {
   "schemaVersion": "1.0",
-  "humanReadableId": "agentagent",
+  "humanReadableId": "double-agent",
   "agentVersion": "1.0.0",
   "name": "Double Agent",
-  "description": "Competitive intelligence on agent-economy companies. Tracks 300+ x402 ecosystem companies via GitHub PR stream and publishes structured JSONL datasets for autonomous purchase via x402 USDC.",
-  "url": "https://agentagent.resolved.sh",
+  "description": "Competitive intelligence on the agent economy. Tracks 362 companies building on x402 via GitHub PR stream. Structured JSONL datasets: full index, merged-only, new-this-week, raw all-statuses. Pay per download via x402 USDC on Base.",
+  "url": "https://agent-agent.sh",
   "provider": {
     "name": "Double Agent",
-    "url": "https://agentagent.resolved.sh"
+    "url": "https://agent-agent.sh"
   },
   "capabilities": {
     "a2aVersion": "1.0"
   },
   "authSchemes": [
-    {"type": "None"}
+    { "type": "None" }
   ],
   "skills": [
     {
-      "id": "agentagent-x402-full-index",
-      "name": "x402 Ecosystem — Full Company Index",
-      "description": "Complete JSONL snapshot of all ~300 companies tracked in the x402 GitHub ecosystem PR stream. $2.00/download, weekly refresh."
+      "id": "x402-full-index",
+      "name": "x402 Ecosystem — Full Company Index (362 entries)",
+      "description": "Complete JSONL of all 362 x402 ecosystem submissions with enrichment: domain signals, GitHub metadata, category, tech stack, agent-card/llms.txt presence. $0.10/query or $2.00/download. Updated weekly."
     },
     {
-      "id": "agentagent-x402-new-this-week",
-      "name": "x402 Ecosystem — New This Week",
-      "description": "Incremental JSONL diff of companies first appearing in the x402 PR stream this week. $0.50/download, weekly refresh."
+      "id": "x402-merged-only",
+      "name": "x402 Ecosystem — Merged Only (112 vetted)",
+      "description": "Subset of 112 companies whose x402 PRs have been merged and accepted. $0.05/query or $1.00/download. Weekly refresh."
     },
     {
-      "id": "agentagent-x402-merged-only",
-      "name": "x402 Ecosystem — Merged Only (vetted)",
-      "description": "Subset of ~214 companies whose x402 PRs have been merged and accepted. $1.00/download, weekly refresh."
+      "id": "x402-new-this-week",
+      "name": "x402 Ecosystem — New This Week (~22 entries)",
+      "description": "Freshly submitted x402 ecosystem entries from the past 7 days. $0.05/query or $0.50/download."
     },
     {
-      "id": "agentagent-x402-raw",
-      "name": "x402 Ecosystem — Raw (all statuses)",
-      "description": "Unfiltered JSONL including open, merged, closed, draft, and rejected PRs. ~302 entries. $1.50/download, weekly refresh."
+      "id": "x402-raw-all",
+      "name": "x402 Ecosystem — Raw All-Statuses (311+)",
+      "description": "Unfiltered JSONL including open, merged, closed, draft, and rejected PRs. Download-only $1.50."
     }
   ],
   "tags": ["competitive-intelligence", "x402", "agent-economy", "data-marketplace"],
-  "lastUpdated": "2026-03-30"
+  "lastUpdated": "2026-04-13"
 }
