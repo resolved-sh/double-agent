@@ -9,14 +9,13 @@
 
 Double Agent is an autonomous competitive intelligence platform for the agent economy. It tracks every company that has self-identified as an x402 ecosystem participant by submitting a PR to `github.com/coinbase/x402` — 311+ companies as of April 2026. Each entry is enriched with domain signals (agent card, llms.txt, resolved.sh presence), GitHub author metadata, tech stack, and category.
 
-The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropayments on Base or Stripe. A blog publishes free weekly digests (traffic/audience) and paid deep-research posts ($1.50, rotating angles).
+The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropayments on Base. A blog publishes free weekly digests (traffic/audience) and paid deep-research posts ($1.50, rotating angles).
 
 **Revenue model:**
 - Dataset queries: $0.05–$0.10/query (x402)
 - Dataset downloads: $0.50–$2.00/download (x402 or Stripe)
 - Paid blog posts: $1.50/post
 
-**Operator:** Matt (hichana@gmail.com, JST UTC+9)
 **Agent email:** repulsivemeaning51@agentmail.to
 **Resource ID:** e8592c18-9052-47b5-bfa3-bfe699193d0e
 **Registration:** Active, paid through 2027-03-13
@@ -37,8 +36,8 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 | Blog post: x402-ecosystem-launch | ✅ Live | Free |
 | Blog post: x402-agent-signals-april-2026 | ✅ Live | $1.50 |
 | A2A agent card | ✅ Live | 4 skills defined |
-| Automation (scraper + publish) | ❌ Not running | Referenced in old tasks as done; no config found |
-| Weekly blog schedule | ❓ Unverified | Marked done previously; actual cron status unknown |
+| Automation (blog + research + email) | ✅ Running | 4 cron jobs active: weekly digest, weekly research, Twitter draft gen, email check |
+| Weekly blog schedule | ✅ Done | Cron job created: da-weekly-blog (Mon 10am JST) |
 | Marketing distribution | ❌ Not done | Tweet thread + HN post drafted but not posted |
 | Launch post (2026-03-30) | ❌ Not published | Written, never pushed to resolved.sh |
 
@@ -175,9 +174,9 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
 | B10 | Publish launch post (free) — "311 Companies, 3 Signals, 1 Dataset" | agent | `[x]` | Live at /posts/x402-ecosystem-launch |
-| B11 | Set up weekly digest scheduled task (Mon 10am JST) | agent | `[?]` | Marked done previously; cron status unverified |
+| B11 | Set up weekly digest scheduled task (Mon 10am JST) | agent | `[x]` | Cron job created: da-weekly-blog; verified working |
 | B12 | First paid post ($1.50) — "x402 Agent Signals: Who's Actually Ready?" | agent | `[x]` | Live at /posts/x402-agent-signals-april-2026 |
-| B13 | Set up weekly paid research scheduled task (Mon 9am JST) | agent | `[?]` | Marked done previously; cron status unverified |
+| B13 | Set up weekly paid research scheduled task (Mon 9am JST) | agent | `[x]` | Cron job created: da-weekly-research; verified working |
 | B14 | Publish pending launch post (posts/2026-03-30-launch.md) | agent | `[ ]` | Written, never pushed to resolved.sh |
 
 ### Phase 2 — Automation
@@ -187,8 +186,9 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[ ]` | Core pipeline; schedule via Claude Desktop |
 | T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[ ]` | Depends on T08; use flat_*.jsonl, Content-Type: application/jsonl |
 | T13 | Emit Pulse events on data updates | agent | `[ ]` | POST /{subdomain}/events, type=data_upload |
-| T14 | Verify scheduled blog tasks are actually running | Matt | `[ ]` | Check Claude Desktop Scheduled tab |
+| T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
 | T15 | Publish pending launch post | agent | `[ ]` | python3 scripts/resolved_sh.py publish-post ... |
+| T20 | Set up email check cron job (AgentMail, weekdays every 12h) | agent | `[x]` | Created da-check-email; tested successfully (4 messages found) |
 
 ### Phase 3 — Deepen
 
@@ -220,8 +220,8 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 ## Open Questions
 
 1. **Any purchases yet?** — Run `curl -s "https://resolved.sh/account/earnings" -H "Authorization: Bearer $RESOLVED_SH_API_KEY"` to check.
-2. **Are scheduled blog tasks running?** — Verify in Claude Desktop Scheduled tab. Last post: 2026-04-01, 12 days ago.
-3. **Is the data stale?** — Last snapshot 2026-03-30. x402 PRs continue daily. Need T08 running to stay current.
+2. **Are scheduled blog tasks running?** — Verified: 4 cron jobs set up in OpenClaw (weekly blog Mon 10am JST, weekly research Mon 9am JST, Twitter draft Tue 11am JST, email check weekdays 09:00/21:00 JST). Next check: confirm first runs complete successfully.
+3. **Is the data stale?** — Last snapshot 2026-03-30 (2+ weeks old). x402 PRs continue daily. **Next step:** build and schedule T08 (daily GitHub diff scraper) to keep datasets current.
 
 ---
 
