@@ -36,7 +36,7 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 | Blog post: x402-ecosystem-launch | ✅ Live | Free |
 | Blog post: x402-agent-signals-april-2026 | ✅ Live | $1.50 |
 | A2A agent card | ✅ Live | 4 skills defined |
-| Automation (blog + research + email) | ✅ Running | 4 cron jobs active: weekly digest, weekly research, Twitter draft gen, email check |
+| Automation (blog + research + email + scraper) | ✅ Running | 5 cron jobs active: daily scrape, weekly digest, weekly research, Twitter draft gen, email check |
 | Weekly blog schedule | ✅ Done | Cron job created: da-weekly-blog (Mon 10am JST) |
 | Marketing distribution | ❌ Not done | Tweet thread + HN post drafted but not posted |
 | Launch post (2026-03-30) | ❌ Not published | Written, never pushed to resolved.sh |
@@ -183,7 +183,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[ ]` | Core pipeline; schedule via Claude Desktop |
+| T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Daily scraper created: scripts/scrape_ecosystem.py; scheduled as da-daily-scrape (03:00 UTC). Test run: 51 new PRs found, full index now 362 entries. |
 | T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[ ]` | Depends on T08; use flat_*.jsonl, Content-Type: application/jsonl |
 | T13 | Emit Pulse events on data updates | agent | `[ ]` | POST /{subdomain}/events, type=data_upload |
 | T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
@@ -220,8 +220,8 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 ## Open Questions
 
 1. **Any purchases yet?** — Run `curl -s "https://resolved.sh/account/earnings" -H "Authorization: Bearer $RESOLVED_SH_API_KEY"` to check.
-2. **Are scheduled blog tasks running?** — Verified: 4 cron jobs set up in OpenClaw (weekly blog Mon 10am JST, weekly research Mon 9am JST, Twitter draft Tue 11am JST, email check weekdays 09:00/21:00 JST). Next check: confirm first runs complete successfully.
-3. **Is the data stale?** — Last snapshot 2026-03-30 (2+ weeks old). x402 PRs continue daily. **Next step:** build and schedule T08 (daily GitHub diff scraper) to keep datasets current.
+2. **Are scheduled blog + scraper tasks running?** — Verified: 5 cron jobs set up in OpenClaw (daily scrape 03:00 UTC, weekly blog Mon 10am JST, weekly research Mon 9am JST, Twitter draft Tue 11am JST, email check weekdays 09:00/21:00 JST). Next step: monitor first runs of scraper and weekly posts for successful execution.
+3. **Is the data fresh?** — Daily scraper now running; last manual test added 51 new PRs (full index 362). Next check: confirm scraper continues to run on schedule without errors.
 
 ---
 
