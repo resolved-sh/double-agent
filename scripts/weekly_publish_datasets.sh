@@ -3,8 +3,8 @@ set -e
 
 # T09/T16: Weekly dataset re-upload to resolved.sh
 # Replaces existing dataset files with fresh versions from flat_* sources
-# Current files: full_index, merged_only, new_this_week, raw_all (not here), sector_data = 5 files (at limit)
-# TODO(Matt): Delete raw_all + new_this_week to unlock sector_infrastructure + sector_ai_agents uploads
+# Uploads: full_index, merged_only, new_this_week, raw_all, sector_data, sector_infrastructure, sector_ai_agents = 7 files
+# Platform limit: 10 files. Room for 3 more Phase 3 products.
 
 cd "$(dirname "$0")/.."
 
@@ -117,17 +117,15 @@ echo "--- Updating sector_data ---"
 delete_file "x402_sector_data.jsonl"
 upload_file "flat_x402_sector_data.jsonl" "x402_sector_data.jsonl" "0.05" "0.75"
 
-# Sector packs: infra + ai_agents require 2 free slots (currently at 5-file limit)
-# Uncomment after Matt approves deleting raw_all + new_this_week:
-# echo ""
-# echo "--- Updating sector_infrastructure ---"
-# delete_file "x402_sector_infrastructure.jsonl"
-# upload_file "flat_x402_sector_infrastructure.jsonl" "x402_sector_infrastructure.jsonl" "0.05" "0.75"
-#
-# echo ""
-# echo "--- Updating sector_ai_agents ---"
-# delete_file "x402_sector_ai_agents.jsonl"
-# upload_file "flat_x402_sector_ai_agents.jsonl" "x402_sector_ai_agents.jsonl" "0.05" "0.75"
+echo ""
+echo "--- Updating sector_infrastructure ---"
+delete_file "x402_sector_infrastructure.jsonl"
+upload_file "flat_x402_sector_infrastructure.jsonl" "x402_sector_infrastructure.jsonl" "0.05" "0.75"
+
+echo ""
+echo "--- Updating sector_ai_agents ---"
+delete_file "x402_sector_ai_agents.jsonl"
+upload_file "flat_x402_sector_ai_agents.jsonl" "x402_sector_ai_agents.jsonl" "0.05" "0.75"
 
 echo ""
 echo "=== Weekly dataset upload complete ==="

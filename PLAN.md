@@ -78,11 +78,10 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 | x402_ecosystem_new_this_week.jsonl | 23 | ✅ | $0.05 | $0.50 | dc851a32 |
 | x402_ecosystem_raw_all.jsonl | — | ❌ (download only) | — | $1.50 | 84311cdf |
 | x402_sector_data.jsonl | 55 | ✅ | $0.05 | $0.75 | adb69cb8 |
-| x402_sector_infrastructure.jsonl | 81 | ⏳ pending slot | $0.05 | $0.75 | — |
-| x402_sector_ai_agents.jsonl | 47 | ⏳ pending slot | $0.05 | $0.75 | — |
+| x402_sector_infrastructure.jsonl | 81 | ✅ | $0.05 | $0.75 | 0db49e07 |
+| x402_sector_ai_agents.jsonl | 47 | ✅ | $0.05 | $0.75 | 7535a44f |
 
-**5-file platform limit:** At max (5 files live). Sector packs infra + ai_agents blocked until 2 slots freed.
-**Recommended:** Delete `raw_all` (0 downloads, download-only, not in weekly cycle) + `new_this_week` (regenerated weekly, 0 downloads) to free 2 slots. Confirm with Matt before deleting.
+**Platform limit:** 10 files (upgraded 2026-04-14). Currently 7 files live. Room for 3 more Phase 3 products.
 
 **Queryable columns:** run_date, pr_number, title, state, submitter, submitter_repos, submitter_company, created_at, domain_primary, domain_secondary, category, description, tech_stack, has_agent_card, has_resolved_sh, has_llms_txt, scrape_title, scrape_desc, is_deprecation, notes, merged_at, updated_at, html_url, enriched
 
@@ -200,7 +199,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| T16 | Sector intelligence packs (infra / data / security) | agent | `[-]` | data pack live (adb69cb8, 55 rows, $0.05/$0.75). infra (81) + ai_agents (47) blocked by 5-file limit. script: scripts/build_sector_packs.py. Needs Matt to approve deleting raw_all + new_this_week to free 2 slots. |
+| T16 | Sector intelligence packs (infra / data / security) | agent | `[x]` | Done 2026-04-14. All 3 packs live: data (adb69cb8, 55), infrastructure (0db49e07, 81), ai_agents (7535a44f, 47). Generator script: scripts/build_sector_packs.py. Weekly regeneration + upload integrated into scripts/weekly_publish_datasets.sh. |
 | T17 | New entrant webhook/feed product | agent | `[-]` | Core webhook infra done: scripts/webhook_registry.py (register/fire), docs/WEBHOOK_API.md (API spec + examples). Daily scraper modified to trigger webhooks after detecting new entries. MVP ready: buyers email webhook URL, agent registers it, new entries fire POST to URL daily. Next: resolve.sh integration for buyer self-service registration. |
 | T18 | Expand data sources (resolved.sh feed, A2A directory, agent-card crawl) | agent | `[ ]` | Phase 3.3 |
 | T19 | Add intelligence layers (funding signals, activity scores, tech stack fingerprinting) | agent | `[ ]` | Phase 3.1 |
