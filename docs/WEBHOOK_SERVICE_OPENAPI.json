@@ -1,0 +1,346 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "x402 Webhook Registration API",
+    "description": "Self-service webhook registration for real-time notifications of new x402 ecosystem companies.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Double Agent Support",
+      "email": "repulsivemeaning51@agentmail.to"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://agentagent.sh/webhook",
+      "description": "Production webhook service"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "Verify the webhook service is running.",
+        "operationId": "getHealth",
+        "tags": ["Health"],
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "Register a new webhook",
+        "description": "Register a webhook URL to receive notifications when new companies are added to the x402 ecosystem.",
+        "operationId": "registerWebhook",
+        "tags": ["Webhooks"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Unique name for this webhook integration",
+                    "example": "my-integration"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "HTTPS endpoint that will receive POST notifications",
+                    "example": "https://my-app.example.com/webhooks/x402"
+                  },
+                  "sectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": ["data", "infrastructure", "ai_agents", "services", "facilitators"]
+                    },
+                    "description": "Optional sector filters. If omitted, receives all new entries.",
+                    "example": ["data", "infrastructure"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Webhook registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "registered"
+                    },
+                    "webhook_id": {
+                      "type": "string",
+                      "example": "my-integration"
+                    },
+                    "webhook_url": {
+                      "type": "string",
+                      "example": "https://my-app.example.com/webhooks/x402"
+                    },
+                    "sectors": {
+                      "type": "array",
+                      "example": ["data", "infrastructure"]
+                    },
+                    "registered_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "next_fire": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "When the next webhook will fire (typically next daily scrape)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request (missing required fields, invalid URL)"
+          },
+          "409": {
+            "description": "Webhook name already registered"
+          },
+          "401": {
+            "description": "Invalid or missing x402 payment verification"
+          }
+        }
+      }
+    },
+    "/unregister": {
+      "post": {
+        "summary": "Unregister a webhook",
+        "description": "Remove a webhook from receiving notifications.",
+        "operationId": "unregisterWebhook",
+        "tags": ["Webhooks"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["webhook_id"],
+                "properties": {
+                  "webhook_id": {
+                    "type": "string",
+                    "description": "ID of the webhook to remove",
+                    "example": "my-integration"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook unregistered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "unregistered"
+                    },
+                    "webhook_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook not found"
+          }
+        }
+      }
+    },
+    "/status/{webhook_id}": {
+      "get": {
+        "summary": "Get webhook status",
+        "description": "Check the status and statistics of a specific webhook.",
+        "operationId": "getWebhookStatus",
+        "tags": ["Webhooks"],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The webhook ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "webhook_id": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    },
+                    "sectors": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "registered_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "last_fired": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "success_count": {
+                      "type": "integer"
+                    },
+                    "error_count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook not found"
+          }
+        }
+      }
+    },
+    "/list": {
+      "get": {
+        "summary": "List all webhooks",
+        "description": "Admin endpoint to list all registered webhooks.",
+        "operationId": "listWebhooks",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "List of all webhooks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "webhooks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "url": { "type": "string" },
+                          "active": { "type": "boolean" },
+                          "sectors": { "type": "array", "items": { "type": "string" } },
+                          "registered_at": { "type": "string", "format": "date-time" },
+                          "last_fired": { "type": "string", "format": "date-time" },
+                          "success_count": { "type": "integer" },
+                          "error_count": { "type": "integer" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WebhookPayload": {
+        "type": "object",
+        "description": "Payload sent to registered webhook URLs when new companies are detected",
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "enum": ["new_entrant"],
+            "description": "Type of event"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the event occurred"
+          },
+          "new_count": {
+            "type": "integer",
+            "description": "Number of new entries in this batch"
+          },
+          "entries": {
+            "type": "array",
+            "description": "Array of new company entries",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pr_number": { "type": "integer" },
+                "title": { "type": "string" },
+                "state": { "type": "string", "enum": ["open", "merged", "closed", "draft"] },
+                "submitter": { "type": "string" },
+                "submitter_company": { "type": ["string", "null"] },
+                "created_at": { "type": "string", "format": "date" },
+                "domain_primary": { "type": ["string", "null"] },
+                "domain_secondary": { "type": ["string", "null"] },
+                "category": { "type": "string" },
+                "description": { "type": "string" },
+                "tech_stack": { "type": "string" },
+                "has_agent_card": { "type": "boolean" },
+                "has_resolved_sh": { "type": "boolean" },
+                "has_llms_txt": { "type": "boolean" },
+                "scrape_title": { "type": "string" },
+                "scrape_desc": { "type": "string" },
+                "is_deprecation": { "type": "boolean" },
+                "notes": { "type": ["string", "null"] },
+                "html_url": { "type": "string", "format": "uri" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
