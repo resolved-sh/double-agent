@@ -73,15 +73,21 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 
 | File | Rows | Queryable | Query $ | Download $ | File ID |
 |------|------|-----------|---------|------------|---------|
-| x402_ecosystem_full_index.jsonl | 311 | ✅ | $0.10 | $2.00 | 83e77593 |
-| x402_ecosystem_merged_only.jsonl | 110 | ✅ | $0.05 | $1.00 | 94a774dc |
-| x402_ecosystem_new_this_week.jsonl | 22 | ✅ | $0.05 | $0.50 | 7e04abea |
+| x402_ecosystem_full_index.jsonl | 365 | ✅ | $0.10 | $2.00 | 8c0a736f |
+| x402_ecosystem_merged_only.jsonl | 112 | ✅ | $0.05 | $1.00 | d1093a13 |
+| x402_ecosystem_new_this_week.jsonl | 23 | ✅ | $0.05 | $0.50 | dc851a32 |
 | x402_ecosystem_raw_all.jsonl | — | ❌ (download only) | — | $1.50 | 84311cdf |
+| x402_sector_data.jsonl | 55 | ✅ | $0.05 | $0.75 | adb69cb8 |
+| x402_sector_infrastructure.jsonl | 81 | ⏳ pending slot | $0.05 | $0.75 | — |
+| x402_sector_ai_agents.jsonl | 47 | ⏳ pending slot | $0.05 | $0.75 | — |
+
+**5-file platform limit:** At max (5 files live). Sector packs infra + ai_agents blocked until 2 slots freed.
+**Recommended:** Delete `raw_all` (0 downloads, download-only, not in weekly cycle) + `new_this_week` (regenerated weekly, 0 downloads) to free 2 slots. Confirm with Matt before deleting.
 
 **Queryable columns:** run_date, pr_number, title, state, submitter, submitter_repos, submitter_company, created_at, domain_primary, domain_secondary, category, description, tech_stack, has_agent_card, has_resolved_sh, has_llms_txt, scrape_title, scrape_desc, is_deprecation, notes, merged_at, updated_at, html_url, enriched
 
 **Note on raw_all:** Uses nested `tech_stack` array — resolved.sh can't index it. Fine as download-only.
-**Note on flat files:** `public/flat_*.jsonl` are the source for uploads (tech_stack as comma string). Use these for any re-uploads of the 3 queryable datasets.
+**Note on flat files:** `public/flat_*.jsonl` and `public/flat_x402_sector_*.jsonl` are the source for uploads. Use these for any re-uploads of queryable datasets.
 
 **Re-upload command (if ever needed):**
 ```bash
@@ -194,7 +200,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| T16 | Sector intelligence packs (infra / data / security) | agent | `[ ]` | Bundle companies by category; sell as themed datasets |
+| T16 | Sector intelligence packs (infra / data / security) | agent | `[-]` | data pack live (adb69cb8, 55 rows, $0.05/$0.75). infra (81) + ai_agents (47) blocked by 5-file limit. script: scripts/build_sector_packs.py. Needs Matt to approve deleting raw_all + new_this_week to free 2 slots. |
 | T17 | New entrant webhook/feed product | agent | `[ ]` | Notify buyers when new companies appear |
 | T18 | Expand data sources (resolved.sh feed, A2A directory, agent-card crawl) | agent | `[ ]` | Phase 3.3 |
 | T19 | Add intelligence layers (funding signals, activity scores, tech stack fingerprinting) | agent | `[ ]` | Phase 3.1 |
