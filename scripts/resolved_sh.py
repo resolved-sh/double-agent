@@ -12,6 +12,7 @@ Usage:
     python scripts/resolved_sh.py list-files <resource_id>                          List data files (with UUIDs)
     python scripts/resolved_sh.py patch-price <resource_id> <file_id>               Update file pricing
     python scripts/resolved_sh.py publish-post <resource_id> <slug> <title> <md_file> [--price 0] [--published-at ISO]  Publish a post
+    python scripts/resolved_sh.py emit-event <subdomain> <event_type> [json_payload]  Emit a Pulse event
     python scripts/resolved_sh.py payout <0x_address>                               Set EVM payout wallet
     python scripts/resolved_sh.py spec                                              Print the resolved.sh llms.txt spec
 
@@ -243,6 +244,41 @@ def cmd_publish_post(resource_id, slug, title, md_content, price_usdc=0, publish
     print(json.dumps(r.json(), indent=2))
 
 
+def cmd_emit_event(subdomain, event_type, payload=None, is_public=True):
+    """
+    Emit a Pulse event to the resource's activity feed.
+
+    POST /{subdomain}/events
+    Auth: API key (resource owner only). Rate limited to 100 events/hour.
+
+    Allowed event_type values:
+      data_upload    — payload: file_id, filename, size_bytes, price_usdc, row_count (opt)
+      task_started   — payload: task_type (crawl|scrape|analyze|generate|process|sync|train|evaluate|deploy|monitor), estimated_seconds (opt)
+      task_completed — payload: task_type, duration_seconds, success (bool)
+      page_updated   — payload: {}
+      milestone      — payload: milestone_type (first_sale|ten_subscribers|hundred_dollars|one_year)
+
+    Returns the event_id on success.
+    """
+    body = {
+        "event_type": event_type,
+        "payload": payload or {},
+        "is_public": is_public,
+    }
+    r = requests.post(
+        f"{BASE}/{subdomain}/events",
+        headers=headers(),
+        json=body,
+    )
+    if r.status_code == 200:
+        result = r.json()
+        print(f"Pulse event emitted: {event_type} → {result.get('event_id')}")
+        return result.get("event_id")
+    else:
+        print(f"ERROR emitting Pulse event ({r.status_code}): {r.text[:300]}")
+        sys.exit(1)
+
+
 def cmd_payout(wallet_address):
     body = {"payout_address": wallet_address}
     r = requests.post(f"{BASE}/account/payout-address", headers=headers(), json=body)
@@ -328,6 +364,15 @@ def main():
                         query_price_usdc=args.query_price,
                         download_price_usdc=args.download_price,
                         description=args.desc)
+
+    elif cmd == "emit-event":
+        if len(sys.argv) < 4:
+            print("Usage: resolved_sh.py emit-event <subdomain> <event_type> [json_payload]")
+            sys.exit(1)
+        subdomain = sys.argv[2]
+        event_type = sys.argv[3]
+        payload = json.loads(sys.argv[4]) if len(sys.argv) >= 5 else {}
+        cmd_emit_event(subdomain, event_type, payload)
 
     elif cmd == "payout":
         if len(sys.argv) < 3:

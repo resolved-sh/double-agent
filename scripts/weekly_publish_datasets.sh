@@ -13,10 +13,18 @@ if [ -f .env ]; then
 fi
 
 RESOURCE_ID="e8592c18-9052-47b5-bfa3-bfe699193d0e"
+SUBDOMAIN="agentagent"
 API_KEY="$RESOLVED_SH_API_KEY"
+UPLOAD_START=$(date +%s)
 
 echo "=== Weekly Dataset Upload ==="
 echo "Resource: $RESOURCE_ID"
+echo ""
+
+# T13: Emit task_started Pulse event
+echo "→ Emitting task_started Pulse event..."
+python3 scripts/resolved_sh.py emit-event "$SUBDOMAIN" task_started \
+  '{"task_type":"sync","estimated_seconds":120}' || true
 echo ""
 
 # Helper: delete file by filename (looks up UUID first)
@@ -101,6 +109,15 @@ upload_file "flat_x402_ecosystem_new_this_week.jsonl" "x402_ecosystem_new_this_w
 
 echo ""
 echo "=== Weekly dataset upload complete ==="
+
+# T13: Emit task_completed Pulse event
+UPLOAD_END=$(date +%s)
+DURATION=$((UPLOAD_END - UPLOAD_START))
+echo ""
+echo "→ Emitting task_completed Pulse event (duration: ${DURATION}s)..."
+python3 scripts/resolved_sh.py emit-event "$SUBDOMAIN" task_completed \
+  "{\"task_type\":\"sync\",\"duration_seconds\":${DURATION},\"success\":true}" || true
+
 echo ""
 echo "Current files on resolved.sh:"
 python3 -c "

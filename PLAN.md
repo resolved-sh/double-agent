@@ -185,7 +185,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 |----|------|-------|--------|-------|
 | T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Fixed 2026-04-13: created cron/da-daily-scrape.md skill + Paperclip routine b4f00e56 (daily 03:00 UTC). Manual run: 3 new PRs, 365 total. |
 | T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[x]` | Weekly upload script: scripts/weekly_publish_datasets.sh; scheduled as `da-weekly-datasets` (Mon 04:00 UTC). Uses delete-then-upload to respect 5-file limit. Verified working: all 3 queryable datasets updated correctly (full_index 362 rows, merged_only 112, new_this_week 23). Pricing correct: full_index q=$0.10/dl=$2.00, merged_only q=$0.05/dl=$1.00, new_this_week q=$0.05/dl=$0.50. |
-| T13 | Emit Pulse events on data updates | agent | `[ ]` | POST /{subdomain}/events, type=data_upload |
+| T13 | Emit Pulse events on data updates | agent | `[x]` | Added emit-event subcommand to resolved_sh.py; weekly_publish_datasets.sh now emits task_started (sync) before uploads and task_completed after. Verified live on agentagent/events feed 2026-04-14. |
 | T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
 | T15 | Publish pending launch post | agent | `[x]` | Already live — same content as B14 (x402-ecosystem-launch) |
 | T20 | Set up email check cron job (AgentMail, weekdays every 12h) | agent | `[x]` | Created da-check-email; tested successfully (4 messages found) |
