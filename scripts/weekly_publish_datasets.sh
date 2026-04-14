@@ -28,6 +28,11 @@ python3 scripts/resolved_sh.py emit-event "$SUBDOMAIN" task_started \
   '{"task_type":"sync","estimated_seconds":120}' || true
 echo ""
 
+# T18: Enrich all data sources (agent cards, resolved.sh metadata, A2A directory)
+echo "--- Enriching data sources (T18) ---"
+python3 scripts/enrich_all_sources.py --all || echo "  ⚠ T18 enrichment had warnings (non-blocking)"
+echo ""
+
 # Helper: delete file by filename (looks up UUID first)
 delete_file() {
   local filename="$1"
