@@ -152,6 +152,63 @@ def save_jsonl(objs, filepath):
         for obj in objs:
             f.write(json.dumps(obj, ensure_ascii=False) + "\n")
 
+def trigger_webhooks(entries, timestamp_str):
+    """
+    T17: Trigger registered webhooks with new entries.
+    Loads webhook subscribers and fires them with the new company data.
+    """
+    webhook_registry_path = BASE_DIR / "data" / "webhook_subscribers.json"
+    if not webhook_registry_path.exists():
+        print("  No webhook subscribers file found. Skipping webhooks.")
+        return
+
+    with open(webhook_registry_path) as f:
+        webhooks = json.load(f)
+
+    active_webhooks = {k: v for k, v in webhooks.items() if v.get("active", True)}
+    if not active_webhooks:
+        print(f"  No active webhooks. (Total registered: {len(webhooks)})")
+        return
+
+    # Build payload
+    payload = {
+        "event_type": "new_entrant",
+        "timestamp": datetime.now(timezone.utc).isoformat() + "Z",
+        "new_count": len(entries),
+        "entries": [
+            {k: v for k, v in e.items() if not k.startswith("_")}
+            for e in entries
+        ],
+    }
+
+    # Fire each webhook
+    success_count = 0
+    for name, webhook_data in active_webhooks.items():
+        url = webhook_data["url"]
+        try:
+            r = requests.post(url, json=payload, timeout=10)
+            if 200 <= r.status_code < 300:
+                print(f"  ✓ {name}: {r.status_code}")
+                success_count += 1
+                webhook_data["success_count"] = webhook_data.get("success_count", 0) + 1
+            else:
+                print(
+                    f"  ✗ {name}: {r.status_code} {r.text[:100] if r.text else ''}",
+                    file=sys.stderr,
+                )
+                webhook_data["error_count"] = webhook_data.get("error_count", 0) + 1
+            webhook_data["last_fired"] = datetime.now(timezone.utc).isoformat()
+        except Exception as e:
+            print(f"  ✗ {name}: {str(e)}", file=sys.stderr)
+            webhook_data["error_count"] = webhook_data.get("error_count", 0) + 1
+            webhook_data["last_fired"] = datetime.now(timezone.utc).isoformat()
+
+    # Save updated webhook registry with new stats
+    with open(webhook_registry_path, "w") as f:
+        json.dump(webhooks, f, indent=2)
+
+    print(f"Webhooks: {success_count}/{len(active_webhooks)} succeeded")
+
 def main():
     if "GITHUB_TOKEN" not in os.environ and not GITHUB_TOKEN:
         print("Warning: No GITHUB_TOKEN found in .env; rate limit 60/hr applies", file=sys.stderr)
@@ -290,6 +347,13 @@ def main():
     new_week_file = PUBLIC_DIR / "flat_x402_ecosystem_new_this_week.jsonl"
     save_jsonl(new_week, new_week_file)
     print(f"New this week dataset: {new_week_file} ({len(new_week)} entries)")
+
+    # 11. Fire webhooks for new entrants (T17)
+    print("\nTriggering webhooks for new entrants...")
+    try:
+        trigger_webhooks(enriched_new, today_str)
+    except Exception as e:
+        print(f"Warning: webhook firing failed (non-blocking): {e}", file=sys.stderr)
 
     print("\nAll done. Ready to commit.")
 

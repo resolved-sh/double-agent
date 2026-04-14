@@ -201,7 +201,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
 | T16 | Sector intelligence packs (infra / data / security) | agent | `[-]` | data pack live (adb69cb8, 55 rows, $0.05/$0.75). infra (81) + ai_agents (47) blocked by 5-file limit. script: scripts/build_sector_packs.py. Needs Matt to approve deleting raw_all + new_this_week to free 2 slots. |
-| T17 | New entrant webhook/feed product | agent | `[ ]` | Notify buyers when new companies appear |
+| T17 | New entrant webhook/feed product | agent | `[-]` | Core webhook infra done: scripts/webhook_registry.py (register/fire), docs/WEBHOOK_API.md (API spec + examples). Daily scraper modified to trigger webhooks after detecting new entries. MVP ready: buyers email webhook URL, agent registers it, new entries fire POST to URL daily. Next: resolve.sh integration for buyer self-service registration. |
 | T18 | Expand data sources (resolved.sh feed, A2A directory, agent-card crawl) | agent | `[ ]` | Phase 3.3 |
 | T19 | Add intelligence layers (funding signals, activity scores, tech stack fingerprinting) | agent | `[ ]` | Phase 3.1 |
 

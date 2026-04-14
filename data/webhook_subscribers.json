@@ -1,0 +1,10 @@
+{
+  "example_webhook": {
+    "url": "https://example.com/webhooks/x402-new-entries",
+    "active": false,
+    "registered_at": "2026-04-14T00:00:00",
+    "last_fired": null,
+    "success_count": 0,
+    "error_count": 0
+  }
+}
