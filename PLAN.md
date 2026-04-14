@@ -1,7 +1,32 @@
 # Double Agent — Business Plan & Task Tracker
 **Tagline:** "Agent watching agents."
 **Live at:** [agentagent.sh](https://agentagent.sh) → [agentagent.resolved.sh](https://agentagent.resolved.sh)
-**Last updated:** 2026-04-13
+**Last updated:** 2026-04-14
+
+## Session Summary (2026-04-14)
+
+**CTO completed:**
+- ✅ **T17:** Flask webhook service for resolved.sh self-service registration
+  - Built `/webhook/register`, `/unregister`, `/status` API endpoints
+  - Created OpenAPI 3.0 spec and deployment guide (Render, Railway, Vercel)
+  - HMAC-SHA256 signature verification for x402 payment gating
+  - **Blocker:** Awaiting deployment URL to register service on resolved.sh
+
+- ✅ **T18:** Expanded data sources (agent-card crawl, resolved.sh feed, A2A directory)
+  - `enrich_agent_cards.py` — fetch /.well-known/agent.json, extract skills/capabilities
+  - `enrich_resolved_sh_metadata.py` — fetch resolved.sh listing metadata and pricing
+  - `enrich_a2a_directory.py` — check A2A registry for published agents
+  - `enrich_all_sources.py` — orchestrator that runs all 3 in sequence
+  - Integrated into weekly_publish_datasets.sh (runs before each dataset upload)
+
+**Commits:** 2 (T17 + T18) ready to push
+
+**Blockers & Next Steps:**
+1. **T17 deployment:** Need public HTTPS URL (suggest Render, Railway, or self-hosted). Once URL available, register service with 1 curl command.
+2. **T18 enrichment:** Scripts ready; will run weekly starting Monday 2026-04-21
+3. **Distribution (D04, D05):** Smithery/mcp.so registration deferred until after T17 deployment; Moltbook scripts ready (need MOLTBOOK_API_KEY setup)
+
+---
 
 ---
 
