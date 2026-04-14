@@ -202,7 +202,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | T16 | Sector intelligence packs (infra / data / security) | agent | `[x]` | Done 2026-04-14. All 3 packs live: data (adb69cb8, 55), infrastructure (0db49e07, 81), ai_agents (7535a44f, 47). Generator script: scripts/build_sector_packs.py. Weekly regeneration + upload integrated into scripts/weekly_publish_datasets.sh. |
 | T17 | New entrant webhook/feed product | agent | `[-]` | Core webhook infra done: scripts/webhook_registry.py (register/fire), docs/WEBHOOK_API.md (API spec + examples). Daily scraper modified to trigger webhooks after detecting new entries. MVP ready: buyers email webhook URL, agent registers it, new entries fire POST to URL daily. Next: resolve.sh integration for buyer self-service registration. |
 | T18 | Expand data sources (resolved.sh feed, A2A directory, agent-card crawl) | agent | `[ ]` | Phase 3.3 |
-| T19 | Add intelligence layers (funding signals, activity scores, tech stack fingerprinting) | agent | `[ ]` | Phase 3.1 |
+| T19 | Add intelligence layers (funding signals, activity scores, tech stack fingerprinting) | agent | `[x]` | Done 2026-04-14. New module: scripts/enrich_intelligence.py. Adds 3 fields to all entries: `activity_score` (0-100, freshness+maturity+stability+signals), `tech_fingerprint` (structured tech extraction by category), `funding_signal` (0-100 heuristic). Integrated into daily scraper and sector pack builder. All 7 datasets re-uploaded to resolved.sh with enrichment. |
 
 ### Distribution
 
@@ -252,3 +252,47 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 - **Flat vs nested:** Use `flat_*.jsonl` for queryable uploads; nested `tech_stack` arrays prevent indexing
 - **env loading:** Shell sessions don't auto-load `.env` — prefix commands with `export $(grep -v '^#' .env | xargs)`
 - **Session cleanup:** Every session ends with `bash scripts/finish_session.sh`
+
+---
+
+## Intelligence Layers (T19 — Added 2026-04-14)
+
+All entries now include three computed intelligence fields:
+
+### `activity_score` (0–100)
+Composite freshness + maturity + stability metric. Higher = more active/healthy.
+- **Freshness (0–30):** Days since last update (0 days = 30 pts, 30+ days = 0 pts)
+- **Maturity (0–40):** Days in ecosystem (365+ days = 40 pts)
+- **Stability (20):** Merged PRs get +20 bonus; open entries = 0
+- **Signal bonus (0–15):** +5 for agent-card, +5 for llms.txt, +5 for resolved.sh presence
+
+**Use case:** Sort by `activity_score DESC` to find actively-maintained integrations.
+
+### `tech_fingerprint` (object)
+Structured extraction of technologies detected in title, description, and tech_stack fields.
+Organized by category: `languages`, `frameworks`, `blockchains`, `payment_protocols`, `ai_llms`, `infrastructure`, `agent_tools`, `data_formats`.
+
+**Example:**
+```json
+{
+  "blockchains": ["base", "solana"],
+  "payment_protocols": ["usdc", "x402"],
+  "ai_llms": ["gpt-4o", "claude"],
+  "infrastructure": ["vercel", "docker"]
+}
+```
+
+**Use case:** Filter by tech stack (e.g., find all Solana + GPT-4o integrations), or analyze ecosystem diversity.
+
+### `funding_signal` (0–100)
+Heuristic funding likelihood score based on:
+- Text mentions of "seed", "series", "VC", "funded", "investment" → +15
+- Feature richness (API count) → up to +20
+- Tech sophistication (Kubernetes, Rust, multi-chain) → +5–20
+- Submitter signals (company affiliation, 20+ repos) → +10–15
+
+**Use case:** Identify likely-funded companies for prioritized outreach or premium tier strategies.
+
+**Note:** All scores are conservative. False negatives are better than false positives for decision-making.
+
+---

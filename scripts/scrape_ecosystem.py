@@ -348,6 +348,17 @@ def main():
     save_jsonl(new_week, new_week_file)
     print(f"New this week dataset: {new_week_file} ({len(new_week)} entries)")
 
+    # 10a. T19: Enrich with intelligence layers (activity_score, tech_fingerprint, funding_signal)
+    print("\nApplying intelligence layer enrichment...")
+    try:
+        from enrich_intelligence import enrich_jsonl
+        enrich_jsonl(str(snapshot_file))
+        enrich_jsonl(str(merged_file))
+        enrich_jsonl(str(new_week_file))
+        print("  ✓ Intelligence layers added to all datasets")
+    except Exception as e:
+        print(f"Warning: intelligence enrichment failed (non-blocking): {e}", file=sys.stderr)
+
     # 11. Fire webhooks for new entrants (T17)
     print("\nTriggering webhooks for new entrants...")
     try:

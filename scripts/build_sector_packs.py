@@ -92,6 +92,16 @@ def main():
                 f.write(json.dumps(row) + "\n")
         print(f"\nWrote {len(sector_rows)} rows → {filename}")
 
+    # T19: Apply intelligence enrichment to sector packs
+    try:
+        from enrich_intelligence import enrich_jsonl
+        for sector in buckets.keys():
+            filename = f"{OUTPUT_DIR}/flat_x402_sector_{sector}.jsonl"
+            enrich_jsonl(filename)
+        print("\n✓ Intelligence enrichment applied to all sector packs")
+    except Exception as e:
+        print(f"\nWarning: Intelligence enrichment failed (non-blocking): {e}", file=sys.stderr)
+
     print("\nDone.")
 
 
