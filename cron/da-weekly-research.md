@@ -1,6 +1,6 @@
 ---
 name: da-weekly-research
-description: Double Agent weekly x402 ecosystem deep-research post — published every Monday at 9am JST
+description: Double Agent weekly x402 ecosystem deep-research post — published every Monday at 3pm JST (06:00 UTC), after the daily scrape (03:00 UTC) and dataset upload (04:00 UTC) complete
 ---
 
 ## Weekly x402 Deep Research Post

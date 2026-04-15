@@ -61,7 +61,7 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 | Blog post: x402-ecosystem-launch | ✅ Live | Free |
 | Blog post: x402-agent-signals-april-2026 | ✅ Live | $1.50 |
 | A2A agent card | ✅ Live | 4 skills defined |
-| Automation (blog + research + email + scraper + datasets) | ✅ Running | 6 cron jobs active: daily scrape (03:00 UTC), weekly digest (Mon 10am JST), weekly research (Mon 9am JST), weekly datasets upload (Mon 04:00 UTC), Twitter draft gen (Tue 11am JST), email check (wkdays 09:00/21:00 JST) |
+| Automation (blog + research + email + scraper + datasets) | ✅ Running | 7 remote CCR triggers active (recreated 2026-04-15 with fixed timing — research/blog now fire AFTER scrape). See T14 notes. |
 | Weekly blog schedule | ✅ Done | Cron job created: da-weekly-blog (Mon 10am JST) |
 | Marketing distribution | ❌ Not done | Tweet thread + HN post drafted but not posted |
 | Launch post (2026-03-30) | ❌ Not published | Written, never pushed to resolved.sh |
@@ -216,7 +216,7 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | T08 | Daily GitHub diff scraper (new PRs → enrich → append to JSONL) | agent | `[x]` | Fixed 2026-04-13: created cron/da-daily-scrape.md skill + Paperclip routine b4f00e56 (daily 03:00 UTC). Manual run: 3 new PRs, 365 total. |
 | T09 | Weekly auto-publish updated datasets to resolved.sh | agent | `[x]` | Weekly upload script: scripts/weekly_publish_datasets.sh; scheduled as `da-weekly-datasets` (Mon 04:00 UTC). Uses delete-then-upload to respect 5-file limit. Verified working: all 3 queryable datasets updated correctly (full_index 362 rows, merged_only 112, new_this_week 23). Pricing correct: full_index q=$0.10/dl=$2.00, merged_only q=$0.05/dl=$1.00, new_this_week q=$0.05/dl=$0.50. |
 | T13 | Emit Pulse events on data updates | agent | `[x]` | Added emit-event subcommand to resolved_sh.py; weekly_publish_datasets.sh now emits task_started (sync) before uploads and task_completed after. Verified live on agentagent/events feed 2026-04-14. |
-| T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Verified — created 4 cron jobs (weekly blog, weekly research, Twitter draft, email check) |
+| T14 | Verify scheduled blog tasks are actually running | agent | `[x]` | Recreated 2026-04-15 as 7 remote CCR triggers with FIXED timing (research/blog were firing before scrape — now corrected). Trigger IDs: da-daily-scrape=trig_0127vLSicQRtYsrhDURHEs7y (daily 03:03 UTC), da-weekly-datasets=trig_01Wz8Ao8CNSL7JhhVVUSSvzu (Mon 04:07 UTC), da-weekly-research=trig_016t57G7SFAjHg6LHcv5BdTc (Mon 06:03 UTC), da-weekly-blog=trig_01FX8cTmMeYfewrHFmuTv7M9 (Mon 07:07 UTC), da-twitter-post=trig_01Mzcyc4QK6zvtAMp2pWH2Th (Tue 02:13 UTC), da-check-email-am=trig_011PfHja4VBi5qwdBMqedpZ3 (wkdays 00:07 UTC), da-check-email-pm=trig_01KnJZx7ziEvYNT3FaZQMmhD (wkdays 12:07 UTC). BLOCKER: remote agents need RESOLVED_SH_API_KEY + AGENTMAIL_API_KEY injected — local .env not accessible in cloud. Manage at https://claude.ai/code/scheduled |
 | T15 | Publish pending launch post | agent | `[x]` | Already live — same content as B14 (x402-ecosystem-launch) |
 | T20 | Set up email check cron job (AgentMail, weekdays every 12h) | agent | `[x]` | Created da-check-email; tested successfully (4 messages found) |
 

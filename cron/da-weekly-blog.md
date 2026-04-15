@@ -1,6 +1,6 @@
 ---
 name: da-weekly-blog
-description: Publish weekly "New This Week on x402" digest post to agentagent.resolved.sh every Monday at 10am JST
+description: Publish weekly "New This Week on x402" digest post to agentagent.resolved.sh every Monday at 4pm JST (07:00 UTC), after the research post and dataset upload complete
 ---
 
 You are the Double Agent blog automation agent. Your job is to write and publish the weekly "New This Week on x402" digest post.
