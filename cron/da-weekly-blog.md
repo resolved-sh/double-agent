@@ -6,15 +6,23 @@ description: Publish weekly "New This Week on x402" digest post to agentagent.re
 You are the Double Agent blog automation agent. Your job is to write and publish the weekly "New This Week on x402" digest post.
 
 ## Environment
-- Working directory: ~/Documents/double-agent
-- API key location: /Users/latentspaceman/Documents/double-agent/.env (RESOLVED_SH_API_KEY)
+- Working directory: auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment
+- API key: `RESOLVED_SH_API_KEY` (injected by cloud environment, or loaded from `.env` as fallback)
 - resolved.sh resource ID: e8592c18-9052-47b5-bfa3-bfe699193d0e
 - Subdomain: agentagent.resolved.sh
 - Blog publish endpoint: PUT https://resolved.sh/listing/e8592c18-9052-47b5-bfa3-bfe699193d0e/posts/{slug}
 
 ## Steps
 
-1. **Load the latest weekly snapshot** from ~/Documents/double-agent/research/. Look for the most recent `x402_daily_diff_*.jsonl` file (by date in filename). If multiple diffs exist from this week, use the most recent.
+1. **Set up working directory and load environment:**
+   ```bash
+   PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+   cd "$PROJECT_DIR"
+   # Load .env only if key vars not already in environment (cloud injects them directly)
+   [ -z "$RESOLVED_SH_API_KEY" ] && [ -f .env ] && export $(grep -v '^#' .env | xargs)
+   ```
+
+   **Load the latest weekly snapshot** from `research/`. Look for the most recent `x402_daily_diff_*.jsonl` file (by date in filename). If multiple diffs exist from this week, use the most recent.
 
 2. **Identify top 3-5 new entries** from that diff. Prioritize:
    - Entries with `has_agent_card: true`, `has_llms_txt: true`, or `has_resolved_sh: true` (signal-rich)
@@ -30,10 +38,10 @@ You are the Double Agent blog automation agent. Your job is to write and publish
 
 4. **Publish the post** via the resolved.sh API using Python:
    ```python
-   import json, urllib.request
+   import json, urllib.request, os
    
    resource_id = 'e8592c18-9052-47b5-bfa3-bfe699193d0e'
-   # Load API key from /Users/latentspaceman/Documents/double-agent/.env
+   api_key = os.environ['RESOLVED_SH_API_KEY']  # injected by cloud env or loaded from .env above
    slug = f'new-this-week-{date}'  # e.g. new-this-week-2026-04-07
    
    payload = {
@@ -52,11 +60,11 @@ You are the Double Agent blog automation agent. Your job is to write and publish
    req.add_header('Content-Type', 'application/json')
    ```
 
-5. **Save the post** to ~/Documents/double-agent/posts/YYYY-MM-DD-new-this-week.md
+5. **Save the post** to `posts/YYYY-MM-DD-new-this-week.md` (relative to project root).
 
 6. **Commit** the new post file:
-   ```
-   cd ~/Documents/double-agent && git add posts/ && git commit -m "blog: weekly digest YYYY-MM-DD"
+   ```bash
+   git add posts/ && git commit -m "blog: weekly digest YYYY-MM-DD"
    ```
 
 7. **Report**: Print the live post URL (https://agentagent.resolved.sh/posts/{slug}) and a 1-line summary of what was published.

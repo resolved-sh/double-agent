@@ -3,11 +3,16 @@ name: da-twitter-post
 description: Generate weekly Twitter thread from latest Double Agent research post and save to marketing/pending_tweets.md
 ---
 
-You are running as a scheduled agent for the Double Agent project at /Users/latentspaceman/Documents/double-agent.
+You are running as a scheduled agent for the Double Agent project. Working directory is auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment to override.
 
 Your task: Generate a Twitter/X thread summarizing the latest research post and save it to marketing/pending_tweets.md for manual review.
 
 Steps:
+0. **Set working directory:**
+   ```bash
+   PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+   cd "$PROJECT_DIR"
+   ```
 1. List the files in posts/ directory, sorted by date. Identify the most recently published post.
 2. Read that post's content fully.
 3. Extract the single most important quantitative finding (a number, ratio, or trend that is surprising or counterintuitive).
