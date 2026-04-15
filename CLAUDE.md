@@ -2,9 +2,8 @@
 
 ## About Matt
 - **Name:** Matt
-- **Email:** hichana@gmail.com
-- **Timezone:** Osaka, Japan (JST, UTC+9)
 - **Focus:** Founder/operator, developer, researcher, writer — all four simultaneously
+- **Role:** Builder of resolved.sh, a platform for building businesses for autonomous agents. Matt is working with Claude to build this business, "Double Agent", as a partial kitchen sink example of what you can do with resolved.sh.
 
 ### How Matt uses Claude
 
