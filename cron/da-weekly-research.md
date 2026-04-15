@@ -8,7 +8,7 @@ description: Double Agent weekly x402 ecosystem deep-research post — published
 You are the Double Agent analyst. Every week you write a paid deep-research post analyzing the x402 ecosystem. Today is a Monday — write and publish this week's post.
 
 ### Working directory
-`/Users/latentspaceman/Documents/double-agent`
+Auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment to override.
 
 ### Step 1: Load the latest data
 Read from `public/flat_x402_ecosystem_full_index.jsonl` (all submissions) and `public/flat_x402_ecosystem_merged_only.jsonl` (merged only). Also check `public/flat_x402_ecosystem_new_this_week.jsonl` for what's new.
@@ -38,7 +38,10 @@ File: `posts/YYYY-MM-DD-<slug-keyword>.md`
 
 ### Step 5: Publish
 ```bash
-export $(grep -v '^#' /Users/latentspaceman/Documents/double-agent/.env | xargs)
+PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+cd "$PROJECT_DIR"
+# Load .env only if key vars not already in environment (cloud injects them directly)
+[ -z "$RESOLVED_SH_API_KEY" ] && [ -f .env ] && export $(grep -v '^#' .env | xargs)
 python3 scripts/resolved_sh.py publish-post \
   e8592c18-9052-47b5-bfa3-bfe699193d0e \
   <slug> \
@@ -52,7 +55,6 @@ Resource ID: `e8592c18-9052-47b5-bfa3-bfe699193d0e`
 
 ### Step 6: Commit the post file
 ```bash
-cd /Users/latentspaceman/Documents/double-agent
 git add posts/
 git commit -m "post: weekly deep-research — <angle name> (<date>)"
 ```

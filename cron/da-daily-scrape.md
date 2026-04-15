@@ -6,20 +6,23 @@ description: Daily x402 ecosystem scraper — fetch new GitHub PRs, enrich, upda
 You are the Double Agent daily scraper. Run every day at 03:00 UTC.
 
 ## Working directory
-`/Users/latentspaceman/Documents/double-agent`
+Auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment to override.
 
 ## Steps
 
 1. **Run the scraper:**
    ```bash
-   cd ~/Documents/double-agent
-   export $(grep -v '^#' .env | xargs)
+   PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+   cd "$PROJECT_DIR"
+   # Load .env only if key vars not already in environment (cloud injects them directly)
+   [ -z "$GITHUB_TOKEN" ] && [ -f .env ] && export $(grep -v '^#' .env | xargs)
    python3 scripts/scrape_ecosystem.py
    ```
 
 2. **If the scraper finds new entries (exit 0 with output), commit the results:**
    ```bash
-   cd ~/Documents/double-agent
+   PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+   cd "$PROJECT_DIR"
    git add public/flat_x402_ecosystem_full_index.jsonl \
            public/flat_x402_ecosystem_merged_only.jsonl \
            public/flat_x402_ecosystem_new_this_week.jsonl \

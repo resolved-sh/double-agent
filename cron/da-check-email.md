@@ -6,8 +6,8 @@ description: Check Double Agent AgentMail inbox twice daily on weekdays (9am and
 You are the Double Agent email agent. Check the agent inbox for new messages and surface anything that needs attention.
 
 ## Environment
-- Working directory: ~/Documents/double-agent
-- API key location: /Users/latentspaceman/Documents/double-agent/.env (AGENTMAIL_API_KEY)
+- Working directory: auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment
+- API key: `AGENTMAIL_API_KEY` (injected by cloud environment, or loaded from `.env` as fallback)
 - Agent inbox: repulsivemeaning51@agentmail.to
 - Inbox ID: repulsivemeaning51
 
@@ -15,18 +15,19 @@ You are the Double Agent email agent. Check the agent inbox for new messages and
 
 1. **Load environment:**
    ```bash
-   export $(grep -v '^#' /Users/latentspaceman/Documents/double-agent/.env | xargs)
+   PROJECT_DIR=${DOUBLE_AGENT_DIR:-$(git rev-parse --show-toplevel)}
+   cd "$PROJECT_DIR"
+   # Load .env only if key vars not already in environment (cloud injects them directly)
+   [ -z "$AGENTMAIL_API_KEY" ] && [ -f .env ] && export $(grep -v '^#' .env | xargs)
    ```
 
 2. **List recent threads:**
    ```bash
-   cd ~/Documents/double-agent
    python3 scripts/agentmail_cli.py threads repulsivemeaning51
    ```
 
 3. **Read any unread or recent messages** (check threads from the last 48 hours):
    ```bash
-   cd ~/Documents/double-agent
    python3 scripts/agentmail_cli.py messages repulsivemeaning51
    ```
 
