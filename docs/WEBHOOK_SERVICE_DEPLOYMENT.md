@@ -16,7 +16,7 @@
 
 ## Deployment Options
 
-### Option A: Render.com (Recommended for Matt)
+### Option A: Render.com (Recommended)
 
 ```bash
 # 1. Go to https://render.com
@@ -177,4 +177,4 @@ The service is now live at:
 
 ---
 
-**Matt:** once you deploy, reply with the URL and I'll finish the resolved.sh registration.
+**Next step:** Once deployed, register the service on resolved.sh with the public URL.

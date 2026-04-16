@@ -46,7 +46,7 @@ Co-Authored-By: Paperclip <noreply@paperclip.ing>"
 5. **Report:** Print count of files uploaded, total size, and current earnings balance.
 
 ## Notes
-- Do NOT push — Matt pushes manually
+- Do NOT push — operator pushes manually
 - If the upload script fails on a file, continue with remaining files (set -e is in the script but individual upload failures are non-fatal)
 - The script already handles enrichment (T18) and Pulse events (T13) — no need to run them separately
 - data/earnings_log.jsonl tracks revenue over time; create the file if it doesn't exist

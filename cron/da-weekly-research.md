@@ -58,7 +58,7 @@ Resource ID: `e8592c18-9052-47b5-bfa3-bfe699193d0e`
 git add posts/
 git commit -m "post: weekly deep-research — <angle name> (<date>)"
 ```
-Do NOT push — Matt pushes manually.
+Do NOT push — operator pushes manually.
 
 ### Step 7: Report
 Output a brief summary: post title, slug, word count, key finding in one sentence, publish status (success/error), commit hash.

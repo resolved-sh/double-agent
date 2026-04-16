@@ -37,6 +37,6 @@ Co-Authored-By: Paperclip <noreply@paperclip.ing>"
 4. **Report:** Print the count of new entries found and the updated totals from each dataset.
 
 ## Notes
-- Do NOT push — Matt pushes manually
+- Do NOT push — operator pushes manually
 - If GitHub rate limit is hit, the script waits automatically
 - No GITHUB_TOKEN = 60 req/hr limit; token allows 5000/hr

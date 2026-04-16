@@ -186,9 +186,9 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 | T01 | Pull all x402 ecosystem PRs from GitHub API into JSONL | agent | `[x]` | Done; 311 entries in public/*.jsonl as of 2026-03-30 |
 | T02 | Enrich company profiles (domain, GitHub, agent-card check) | agent | `[x]` | Done; has_agent_card, has_llms_txt, has_resolved_sh fields present |
 | T03 | Structure output as .jsonl per weekly snapshot | agent | `[x]` | Done; 4 SKUs in public/ |
-| T04 | Get RESOLVED_SH_API_KEY | Matt | `[x]` | Done 2026-03-26 |
+| T04 | Get RESOLVED_SH_API_KEY | operator | `[x]` | Done 2026-03-26 |
 | T05 | Update listing (description, llms.txt, agent-card.json) | agent | `[x]` | Done 2026-03-26 |
-| T06 | Register EVM payout wallet | Matt | `[x]` | Done 2026-04-13; 0xf150e26... |
+| T06 | Register EVM payout wallet | operator | `[x]` | Done 2026-04-13; 0xf150e26... |
 | T07 | Upload datasets + set prices | agent | `[x]` | Done; re-uploaded 2026-04-13 with correct Content-Type |
 
 ### Infra / Tooling
@@ -233,9 +233,9 @@ Status legend: `[ ]` open · `[x]` done · `[-]` blocked · `[?]` unverified
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| D01 | Post tweet thread (marketing/pending_tweets.md) | Matt | `[ ]` | Ready to post |
-| D02 | Post Show HN (marketing/posts.md) | Matt | `[ ]` | Draft exists |
-| D03 | Publish to HuggingFace | Matt | `[ ]` | distribution/huggingface/README.md exists |
+| D01 | Post tweet thread (marketing/pending_tweets.md) | operator | `[ ]` | Ready to post |
+| D02 | Post Show HN (marketing/posts.md) | operator | `[ ]` | Draft exists |
+| D03 | Publish to HuggingFace | operator | `[ ]` | distribution/huggingface/README.md exists |
 | D04 | List on Smithery / mcp.so | agent | `[ ]` | After page is fully polished |
 | D05 | Post to Moltbook (x402-intel, openclaw, data, startups) | agent | `[ ]` | `marketing/moltbook.md` — strategy + scripts
 
