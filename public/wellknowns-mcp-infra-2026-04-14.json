@@ -1,0 +1,764 @@
+[
+  {
+    "domain": "sentry.io",
+    "rank": 102,
+    "crawled_at": "2026-03-24T03:56:54.881115+00:00",
+    "mcp_json": {
+      "name": "Sentry",
+      "description": "Connect to Sentry, debug faster.",
+      "endpoint": "https://mcp.sentry.dev/mcp"
+    }
+  },
+  {
+    "domain": "alidns.com",
+    "rank": 328,
+    "crawled_at": "2026-03-24T03:59:19.913344+00:00",
+    "mcp_json": {
+      "status": 500,
+      "message": "System Error",
+      "body": {
+        "success": false
+      }
+    },
+    "oauth_protected_resource": {
+      "status": 500,
+      "message": "System Error",
+      "body": {
+        "success": false
+      }
+    }
+  },
+  {
+    "domain": "gitlab.com",
+    "rank": 434,
+    "crawled_at": "2026-03-24T04:00:25.991267+00:00",
+    "oauth_protected_resource": {
+      "resource": [
+        "https://gitlab.com/api/v4/mcp",
+        "https://gitlab.com/api/v4/orbit/mcp"
+      ],
+      "authorization_servers": [
+        "https://gitlab.com"
+      ],
+      "scopes_supported": [
+        "mcp",
+        "mcp_orbit"
+      ]
+    }
+  },
+  {
+    "domain": "prodregistryv2.org",
+    "rank": 912,
+    "crawled_at": "2026-03-24T04:05:51.881347+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://prodregistryv2.org/",
+      "authorization_servers": [
+        "https://prodregistryv2.org/"
+      ]
+    }
+  },
+  {
+    "domain": "note.com",
+    "rank": 992,
+    "crawled_at": "2026-03-24T04:06:59.182108+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://note.com",
+      "authorization_servers": [
+        "https://note.com"
+      ],
+      "scopes_supported": [
+        "me:read",
+        "notes:read"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ]
+    }
+  },
+  {
+    "domain": "quizlet.com",
+    "rank": 998,
+    "crawled_at": "2026-03-24T04:07:04.861255+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://api.quizlet.com/v4/partner/v1/mcp",
+      "authorization_servers": [
+        "https://quizlet.com"
+      ],
+      "scopes_supported": [
+        "write_set"
+      ]
+    }
+  },
+  {
+    "domain": "vnexpress.net",
+    "rank": 1183,
+    "crawled_at": "2026-03-24T04:09:12.942573+00:00",
+    "mcp_json": {
+      "applinks": {
+        "apps": [],
+        "details": [
+          {
+            "appID": "JP9WGN5D68.net.vnexpress.iphone",
+            "paths": [
+              "/",
+              "/thoi-su",
+              "/thoi-su/*",
+              "/goc-nhin",
+              "/goc-nhin/*",
+              "/the-gioi",
+              "/the-gioi/*",
+              "/video",
+              "/video/*",
+              "/kinh-doanh",
+              "/kinh-doanh/*",
+              "/bat-dong-san",
+              "/bat-dong-san/*",
+              "/khoa-hoc",
+              "/khoa-hoc/*",
+              "/giai-tri",
+              "/giai-tri/*",
+              "/the-thao",
+              "/the-thao/*",
+              "/phap-luat",
+              "/phap-luat/*",
+              "/giao-duc",
+              "/giao-duc/*",
+              "/suc-khoe",
+              "/suc-khoe/*",
+              "/doi-song",
+              "/doi-song/*",
+              "/du-lich",
+              "/du-lich/*",
+              "/so-hoa",
+              "/so-hoa/*",
+              "/oto-xe-may",
+              "/oto-xe-may/*",
+              "/y-kien",
+              "/y-kien/*",
+              "/tam-su",
+              "/tam-su/*",
+              "/thu-gian",
+              "/thu-gian/*",
+              "/podcast",
+              "/podcast/*",
+              "/*.html",
+              "/topic/*",
+              "/tin-tuc-24h",
+              "/tin-xem-nhieu",
+              "/anh",
+              "/infographics",
+              "/goc-nhin/binh-luan-nhieu",
+              "/goc-nhin/tac-gia",
+              "/tac-gia/*.html",
+              "/nhip-song",
+              "/nhip-song/*",
+              "/food",
+              "NOT /bat-dong-san/tu-van",
+              "NOT /giao-duc/tuyen-sinh/tu-van",
+              "NOT /phap-luat/tu-van",
+              "NOT /oto-xe-may/dien-dan",
+              "NOT /the-thao/du-lieu-bong-da",
+              "NOT /giai-tri/phim/thu-vien-phim",
+              "NOT /du-lich/cam-nang",
+              "NOT /oto-xe-may/car-awards-2023",
+              "NOT /oto-xe-may/v-car",
+              "NOT /oto-xe-may/v-bike",
+              "NOT /oto-xe-may/thi-bang-lai-oto-b1-b2/mo-phong"
+            ]
+          }
+        ]
+      },
+      "webcredentials": {
+        "apps": [
+          "JP9WGN5D68.net.vnexpress.iphone"
+        ]
+      }
+    },
+    "oauth_protected_resource": {
+      "applinks": {
+        "apps": [],
+        "details": [
+          {
+            "appID": "JP9WGN5D68.net.vnexpress.iphone",
+            "paths": [
+              "/",
+              "/thoi-su",
+              "/thoi-su/*",
+              "/goc-nhin",
+              "/goc-nhin/*",
+              "/the-gioi",
+              "/the-gioi/*",
+              "/video",
+              "/video/*",
+              "/kinh-doanh",
+              "/kinh-doanh/*",
+              "/bat-dong-san",
+              "/bat-dong-san/*",
+              "/khoa-hoc",
+              "/khoa-hoc/*",
+              "/giai-tri",
+              "/giai-tri/*",
+              "/the-thao",
+              "/the-thao/*",
+              "/phap-luat",
+              "/phap-luat/*",
+              "/giao-duc",
+              "/giao-duc/*",
+              "/suc-khoe",
+              "/suc-khoe/*",
+              "/doi-song",
+              "/doi-song/*",
+              "/du-lich",
+              "/du-lich/*",
+              "/so-hoa",
+              "/so-hoa/*",
+              "/oto-xe-may",
+              "/oto-xe-may/*",
+              "/y-kien",
+              "/y-kien/*",
+              "/tam-su",
+              "/tam-su/*",
+              "/thu-gian",
+              "/thu-gian/*",
+              "/podcast",
+              "/podcast/*",
+              "/*.html",
+              "/topic/*",
+              "/tin-tuc-24h",
+              "/tin-xem-nhieu",
+              "/anh",
+              "/infographics",
+              "/goc-nhin/binh-luan-nhieu",
+              "/goc-nhin/tac-gia",
+              "/tac-gia/*.html",
+              "/nhip-song",
+              "/nhip-song/*",
+              "/food",
+              "NOT /bat-dong-san/tu-van",
+              "NOT /giao-duc/tuyen-sinh/tu-van",
+              "NOT /phap-luat/tu-van",
+              "NOT /oto-xe-may/dien-dan",
+              "NOT /the-thao/du-lieu-bong-da",
+              "NOT /giai-tri/phim/thu-vien-phim",
+              "NOT /du-lich/cam-nang",
+              "NOT /oto-xe-may/car-awards-2023",
+              "NOT /oto-xe-may/v-car",
+              "NOT /oto-xe-may/v-bike",
+              "NOT /oto-xe-may/thi-bang-lai-oto-b1-b2/mo-phong"
+            ]
+          }
+        ]
+      },
+      "webcredentials": {
+        "apps": [
+          "JP9WGN5D68.net.vnexpress.iphone"
+        ]
+      }
+    }
+  },
+  {
+    "domain": "wayground.com",
+    "rank": 1213,
+    "crawled_at": "2026-03-24T04:09:30.818009+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://wayground.com/_quizizzmcp/main/mcp",
+      "authorization_servers": [
+        "https://wayground.com"
+      ],
+      "scopes_supported": [
+        "full_access"
+      ]
+    }
+  },
+  {
+    "domain": "huggingface.co",
+    "rank": 2037,
+    "crawled_at": "2026-03-24T04:22:24.264904+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://huggingface.co/mcp",
+      "authorization_servers": [
+        "https://huggingface.co"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ],
+      "scopes_supported": [
+        "openid",
+        "profile",
+        "read-mcp",
+        "read-repos",
+        "jobs",
+        "contribute-repos",
+        "inference-api"
+      ]
+    }
+  },
+  {
+    "domain": "prezi.com",
+    "rank": 2624,
+    "crawled_at": "2026-03-24T04:30:14.299569+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://prezi.com",
+      "authorization_servers": [
+        "https://prezi.com"
+      ],
+      "scopes_supported": [
+        "openid",
+        "profile",
+        "email",
+        "create_presentation",
+        "edit_presentation"
+      ]
+    }
+  },
+  {
+    "domain": "statsigapi.net",
+    "rank": 3804,
+    "crawled_at": "2026-03-24T04:45:26.840213+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://statsigapi.net/",
+      "authorization_servers": [
+        "https://statsigapi.net/"
+      ]
+    }
+  },
+  {
+    "domain": "opensea.io",
+    "rank": 4350,
+    "crawled_at": "2026-03-24T04:53:02.721767+00:00",
+    "mcp_json": {
+      "mcpServers": [
+        {
+          "name": "OpenSea",
+          "description": "Access OpenSea marketplace data - NFTs, tokens, collections, swaps, and more",
+          "url": "https://mcp.opensea.io/mcp",
+          "transport": "streamable-http",
+          "authentication": {
+            "type": "bearer",
+            "description": "Requires an OpenSea MCP token. Get one at https://opensea.io/settings/developer"
+          },
+          "capabilities": [
+            "search_collections",
+            "search_items",
+            "search_tokens",
+            "search",
+            "get_collections",
+            "get_items",
+            "get_tokens",
+            "get_token_swap_quote",
+            "get_token_balances",
+            "get_nft_balances",
+            "get_activity",
+            "get_top_collections",
+            "get_trending_collections",
+            "get_top_tokens",
+            "get_trending_tokens",
+            "get_profile",
+            "account_lookup",
+            "get_chains",
+            "get_upcoming_drops",
+            "get_drop_details",
+            "get_mint_action"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "domain": "psychcentral.com",
+    "rank": 7359,
+    "crawled_at": "2026-03-24T05:34:33.368396+00:00",
+    "mcp_json": {
+      "gpc": true,
+      "lastUpdate": "2023-12-15"
+    },
+    "oauth_protected_resource": {
+      "gpc": true,
+      "lastUpdate": "2023-12-15"
+    }
+  },
+  {
+    "domain": "ikman.lk",
+    "rank": 7909,
+    "crawled_at": "2026-03-24T05:42:22.901204+00:00",
+    "mcp_json": [
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "lk.ikman",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.bikroy",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.tonaton",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      }
+    ],
+    "oauth_protected_resource": [
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "lk.ikman",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.bikroy",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.tonaton",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "domain": "purchasely.io",
+    "rank": 9958,
+    "crawled_at": "2026-03-24T06:14:41.778388+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://purchasely.io/mcp",
+      "authorization_servers": [
+        "https://purchasely.io"
+      ]
+    }
+  },
+  {
+    "domain": "ifttt.com",
+    "rank": 10380,
+    "crawled_at": "2026-03-24T06:21:12.545146+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://ifttt.com/mcp",
+      "authorization_servers": [
+        "https://ifttt.com"
+      ],
+      "scopes_supported": [
+        "mcp"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ],
+      "resource_name": "IFTTT MCP Server",
+      "resource_documentation": "https://ifttt.com/docs/mcp"
+    }
+  },
+  {
+    "domain": "dochub.com",
+    "rank": 11788,
+    "crawled_at": "2026-03-24T06:43:22.654599+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://dochub.com",
+      "authorization_servers": [
+        "https://dochub.com"
+      ]
+    }
+  },
+  {
+    "domain": "cloudconvert.com",
+    "rank": 11891,
+    "crawled_at": "2026-03-24T06:45:12.886083+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://cloudconvert.com",
+      "authorization_servers": [
+        "https://cloudconvert.com"
+      ],
+      "scopes_supported": [
+        "user.read",
+        "user.write",
+        "task.read",
+        "task.write",
+        "webhook.read",
+        "webhook.write",
+        "preset.read",
+        "preset.write"
+      ]
+    }
+  },
+  {
+    "domain": "runsignup.com",
+    "rank": 13415,
+    "crawled_at": "2026-03-24T07:11:22.059278+00:00",
+    "oauth_protected_resource": {
+      "authorization_servers": [
+        "https://runsignup.com"
+      ],
+      "resource": "https://api.runsignup.com",
+      "scopes_supported": [
+        "rsu_api_read",
+        "rsu_api_write",
+        "mcp.access",
+        "rsu_admin.super_user",
+        "rsu_admin.developer",
+        "rsu_admin.finance",
+        "rsu_admin.onboarding_retention",
+        "rsu_admin.employee"
+      ],
+      "token_endpoint_auth_methods_supported": [
+        "client_secret_post"
+      ],
+      "resource_policy_uri": "https://runsignup.com/https://info.runsignup.comhttps://info.runsignup.com/about-us/legal/",
+      "resource_tos_uri": "https://runsignup.com/https://info.runsignup.comhttps://info.runsignup.com/about-us/legal/",
+      "resource_name": "RunSignUp API endpoints",
+      "service_documentation": "https://runsignup.com/API"
+    }
+  },
+  {
+    "domain": "oast.fun",
+    "rank": 15693,
+    "crawled_at": "2026-03-24T07:51:36.734075+00:00",
+    "mcp_json": {
+      "data": ""
+    }
+  },
+  {
+    "domain": "greatist.com",
+    "rank": 17995,
+    "crawled_at": "2026-03-24T08:34:40.484651+00:00",
+    "mcp_json": {
+      "gpc": true,
+      "lastUpdate": "2023-12-15"
+    },
+    "oauth_protected_resource": {
+      "gpc": true,
+      "lastUpdate": "2023-12-15"
+    }
+  },
+  {
+    "domain": "blurams.com",
+    "rank": 18682,
+    "crawled_at": "2026-03-24T08:46:36.066144+00:00",
+    "mcp_json": {
+      "failflag": 500,
+      "failmsg": ""
+    },
+    "oauth_protected_resource": {
+      "failflag": 500,
+      "failmsg": ""
+    }
+  },
+  {
+    "domain": "bikroy.com",
+    "rank": 18968,
+    "crawled_at": "2026-03-24T08:51:36.906045+00:00",
+    "mcp_json": [
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "lk.ikman",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.bikroy",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.tonaton",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      }
+    ],
+    "oauth_protected_resource": [
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "lk.ikman",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.bikroy",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      },
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.tonaton",
+          "sha256_cert_fingerprints": [
+            "1A:5F:8D:A7:50:B7:83:69:37:62:C0:86:1E:13:51:BA:D0:1B:20:B2:98:14:AB:C3:9E:80:43:FA:95:93:FB:63"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "domain": "oast.live",
+    "rank": 20014,
+    "crawled_at": "2026-03-24T09:11:54.040517+00:00",
+    "mcp_json": {
+      "data": ""
+    }
+  },
+  {
+    "domain": "wefunder.com",
+    "rank": 20628,
+    "crawled_at": "2026-03-24T09:24:04.098763+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://wefunder.com/mcp/server",
+      "authorization_servers": [
+        "https://wefunder.com"
+      ],
+      "scopes_supported": [
+        "read:syndicates",
+        "read:profile"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ]
+    }
+  },
+  {
+    "domain": "exceedlms.com",
+    "rank": 26069,
+    "crawled_at": "2026-03-24T11:14:40.095636+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://exceedlms.com/mcp",
+      "authorization_servers": [
+        "https://exceedlms.com/oauth2"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ],
+      "scopes_supported": [
+        "ai_agent",
+        "openid"
+      ]
+    }
+  },
+  {
+    "domain": "hemingwayapp.com",
+    "rank": 26844,
+    "crawled_at": "2026-03-24T11:31:09.090843+00:00",
+    "oauth_protected_resource": {
+      "resource": "https://localhost:10000",
+      "authorization_servers": []
+    }
+  },
+  {
+    "domain": "shields.io",
+    "rank": 28848,
+    "crawled_at": "2026-03-24T12:15:43.062342+00:00",
+    "mcp_json": {
+      "label": "404",
+      "message": "badge not found",
+      "color": "red",
+      "link": [
+        "",
+        ""
+      ],
+      "name": "404",
+      "value": "badge not found"
+    }
+  },
+  {
+    "domain": "framagit.org",
+    "rank": 30511,
+    "crawled_at": "2026-03-24T12:54:27.789437+00:00",
+    "oauth_protected_resource": {
+      "resource": [
+        "https://framagit.org/api/v4/mcp",
+        "https://framagit.org/api/v4/orbit/mcp"
+      ],
+      "authorization_servers": [
+        "https://framagit.org"
+      ],
+      "scopes_supported": [
+        "mcp",
+        "mcp_orbit"
+      ]
+    }
+  },
+  {
+    "domain": "nofilmschool.com",
+    "rank": 31605,
+    "crawled_at": "2026-03-24T13:20:15.067221+00:00",
+    "oauth_protected_resource": {
+      "resource_server": "https://nofilmschool.com",
+      "authorization_servers": [
+        "https://nofilmschool.com"
+      ]
+    }
+  }
+]
