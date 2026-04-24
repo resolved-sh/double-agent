@@ -1,0 +1,257 @@
+[
+  {
+    "domain": "vnexpress.net",
+    "rank": 1184,
+    "crawled_at": "2026-04-13T23:42:11.594214+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "psychcentral.com",
+    "rank": 7335,
+    "crawled_at": "2026-04-14T01:16:50.650493+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.fun",
+    "rank": 14360,
+    "crawled_at": "2026-04-14T03:28:23.809331+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.live",
+    "rank": 19792,
+    "crawled_at": "2026-04-14T05:24:24.445423+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "blurams.com",
+    "rank": 20901,
+    "crawled_at": "2026-04-14T05:48:40.400489+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "greatist.com",
+    "rank": 22905,
+    "crawled_at": "2026-04-14T06:33:25.494934+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "shields.io",
+    "rank": 28963,
+    "crawled_at": "2026-04-14T21:16:51.415665+00:00",
+    "name": "404",
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "b23.tv",
+    "rank": 35272,
+    "crawled_at": "2026-04-15T01:48:08.583795+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.me",
+    "rank": 37534,
+    "crawled_at": "2026-04-15T02:49:42.309067+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "zhivika.ru",
+    "rank": 48687,
+    "crawled_at": "2026-04-15T08:15:16.234254+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "roadmap.sh",
+    "rank": 50018,
+    "crawled_at": "2026-04-15T08:56:37.512435+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.site",
+    "rank": 54205,
+    "crawled_at": "2026-04-15T11:12:44.700808+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "blockcraft.co",
+    "rank": 62557,
+    "crawled_at": "2026-04-15T16:14:28.102948+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "apilayer.net",
+    "rank": 68920,
+    "crawled_at": "2026-04-15T20:32:21.363961+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "attio.com",
+    "rank": 74257,
+    "crawled_at": "2026-04-16T00:14:17.416807+00:00",
+    "name": "Attio",
+    "description": "AI CRM. Connect via MCP server or REST API.",
+    "url": "https://attio.com",
+    "version": "1.0.0",
+    "skills": [],
+    "capabilities": {
+      "pushNotifications": false,
+      "streaming": true
+    },
+    "default_input_modes": [
+      "text/plain",
+      "application/json"
+    ],
+    "default_output_modes": [
+      "text/plain",
+      "application/json"
+    ]
+  },
+  {
+    "domain": "gymbeam.sk",
+    "rank": 76156,
+    "crawled_at": "2026-04-16T01:39:27.534191+00:00",
+    "name": "GymBeam Slovakia",
+    "description": "GymBeam is a leading European sports nutrition and fitness e-commerce platform. This is the Slovakia store.",
+    "url": "https://gymbeam.sk",
+    "version": null,
+    "skills": [
+      {
+        "id": "product-search",
+        "name": "Product Search",
+        "description": "Search GymBeam product catalog including supplements, vitamins, sports nutrition, healthy food, and fitness accessories.",
+        "tags": [
+          "e-commerce",
+          "sports-nutrition",
+          "supplements",
+          "fitness",
+          "health"
+        ],
+        "examples": [
+          "What whey protein products does GymBeam offer?",
+          "Find creatine monohydrate supplements",
+          "What are the best-selling pre-workout products?",
+          "Show me vegan protein options"
+        ]
+      },
+      {
+        "id": "nutrition-info",
+        "name": "Nutrition Information",
+        "description": "Get detailed nutrition facts, ingredients, and allergen information for GymBeam products.",
+        "tags": [
+          "nutrition",
+          "ingredients",
+          "allergens",
+          "macros"
+        ],
+        "examples": [
+          "What are the nutrition facts for Just Whey protein?",
+          "Does this product contain gluten?",
+          "How much protein per serving in True Whey?"
+        ]
+      }
+    ],
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": false
+    },
+    "default_input_modes": [],
+    "default_output_modes": []
+  }
+]

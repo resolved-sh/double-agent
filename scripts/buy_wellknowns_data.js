@@ -25,11 +25,20 @@ const account = privateKeyToAccount(`0x${process.env.WALLET_PRIVATE_KEY}`);
 const walletClient = createWalletClient({ account, chain: base, transport: http() });
 console.log('Wallet:', account.address);
 
-// ─── Date candidates ──────────────────────────────────────────────────────────
-const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
-const today = nowJST.toISOString().slice(0, 10);
-const fallbacks = ['2026-04-14', '2026-03-24'];
-const candidates = [today, ...fallbacks.filter(d => d !== today)];
+// ─── Discover available filenames from catalog ────────────────────────────────
+async function fetchCatalog() {
+  const res = await fetch(BASE_URL, { headers: { 'Accept': 'application/agent+json' } });
+  if (!res.ok) throw new Error(`Catalog fetch failed: ${res.status}`);
+  const data = await res.json();
+  return data?.data_marketplace?.files ?? [];
+}
+
+function latestFileForPrefix(files, prefix, extension) {
+  const matches = files
+    .filter(f => f.filename.startsWith(prefix) && f.filename.endsWith(`.${extension}`))
+    .sort((a, b) => b.filename.localeCompare(a.filename));
+  return matches[0]?.filename ?? null;
+}
 
 // ─── EIP-712 payment header ───────────────────────────────────────────────────
 async function buildPaymentHeader(spec) {
@@ -138,34 +147,25 @@ async function purchaseFile(filename) {
   return { data: await r2.text(), paid: raw.amount };
 }
 
-// ─── Try date candidates for a file prefix ────────────────────────────────────
-async function purchaseLatest(prefix, extension) {
-  for (const date of candidates) {
-    const filename = `${prefix}-${date}.${extension}`;
-    try {
-      const result = await purchaseFile(filename);
-      if (result) return { ...result, date, filename };
-    } catch (err) {
-      console.error(`  Error for ${filename}:`, err.message);
-    }
-  }
-  return null;
-}
-
 // ─── Main ─────────────────────────────────────────────────────────────────────
 const publicDir = join(__dirname, '..', 'public');
 mkdirSync(publicDir, { recursive: true });
+
+console.log('\nFetching catalog from Well Knowns...');
+const catalog = await fetchCatalog();
+console.log(`Found ${catalog.length} files in catalog.`);
 
 let totalPaid = 0n;
 
 // Purchase agent index
 console.log('\n=== Purchasing agent-index ===');
-const agentResult = await purchaseLatest('agent-index', 'json');
-if (!agentResult) {
-  console.error('Could not purchase agent-index. Tried dates:', candidates);
-  process.exit(1);
-}
-const agentOut = join(publicDir, `wellknowns-agent-index-${agentResult.date}.json`);
+const agentFilename = latestFileForPrefix(catalog, 'agent-index', 'json');
+if (!agentFilename) { console.error('No agent-index file found in catalog.'); process.exit(1); }
+console.log(`Latest: ${agentFilename}`);
+const agentResult = await purchaseFile(agentFilename);
+if (!agentResult) { console.error('Purchase returned null.'); process.exit(1); }
+const agentDate = agentFilename.match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? 'unknown';
+const agentOut = join(publicDir, `wellknowns-agent-index-${agentDate}.json`);
 writeFileSync(agentOut, agentResult.data, 'utf8');
 console.log(`✓ Saved → ${agentOut}`);
 if (agentResult.paid) {
@@ -175,12 +175,13 @@ if (agentResult.paid) {
 
 // Purchase MCP infrastructure
 console.log('\n=== Purchasing mcp-infrastructure ===');
-const mcpResult = await purchaseLatest('mcp-infrastructure', 'json');
-if (!mcpResult) {
-  console.error('Could not purchase mcp-infrastructure. Tried dates:', candidates);
-  process.exit(1);
-}
-const mcpOut = join(publicDir, `wellknowns-mcp-infra-${mcpResult.date}.json`);
+const mcpFilename = latestFileForPrefix(catalog, 'mcp-infrastructure', 'json');
+if (!mcpFilename) { console.error('No mcp-infrastructure file found in catalog.'); process.exit(1); }
+console.log(`Latest: ${mcpFilename}`);
+const mcpResult = await purchaseFile(mcpFilename);
+if (!mcpResult) { console.error('Purchase returned null.'); process.exit(1); }
+const mcpDate = mcpFilename.match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? 'unknown';
+const mcpOut = join(publicDir, `wellknowns-mcp-infra-${mcpDate}.json`);
 writeFileSync(mcpOut, mcpResult.data, 'utf8');
 console.log(`✓ Saved → ${mcpOut}`);
 if (mcpResult.paid) {
@@ -191,14 +192,12 @@ if (mcpResult.paid) {
 console.log(`\n=== Total spent: $${(Number(totalPaid) / 1e6).toFixed(4)} USDC ===`);
 
 // Preview first entry from each
-const agentLines = agentResult.data.trim().split('\n');
 const firstAgent = agentResult.data.startsWith('[')
   ? JSON.parse(agentResult.data)[0]
-  : JSON.parse(agentLines[0]);
+  : JSON.parse(agentResult.data.trim().split('\n')[0]);
 console.log('\nSample agent-index entry:', JSON.stringify(firstAgent, null, 2));
 
-const mcpLines = mcpResult.data.trim().split('\n');
 const firstMcp = mcpResult.data.startsWith('[')
   ? JSON.parse(mcpResult.data)[0]
-  : JSON.parse(mcpLines[0]);
+  : JSON.parse(mcpResult.data.trim().split('\n')[0]);
 console.log('\nSample mcp-infrastructure entry:', JSON.stringify(firstMcp, null, 2));
