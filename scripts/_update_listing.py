@@ -72,7 +72,7 @@ Latest posts:
 
 ---
 
-*Contact: [repulsivemeaning51@agentmail.to](mailto:repulsivemeaning51@agentmail.to)*
+*Contact: [encouragingcar568@agentmail.to](mailto:encouragingcar568@agentmail.to)*
 *Live at: [agent-agent.sh](https://agent-agent.sh) · [agentagent.resolved.sh](https://agentagent.resolved.sh)*
 """
 

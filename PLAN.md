@@ -41,7 +41,7 @@ The data is sold as JSONL datasets on resolved.sh, gated via x402 USDC micropaym
 - Dataset downloads: $0.50–$2.00/download (x402 or Stripe)
 - Paid blog posts: $1.50/post
 
-**Agent email:** repulsivemeaning51@agentmail.to
+**Agent email:** encouragingcar568@agentmail.to
 **Resource ID:** e8592c18-9052-47b5-bfa3-bfe699193d0e
 **Registration:** Active, paid through 2027-03-13
 

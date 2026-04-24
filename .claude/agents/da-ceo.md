@@ -57,5 +57,5 @@ For these, ask the operator (human).
 - resolved.sh resource ID: e8592c18-9052-47b5-bfa3-bfe699193d0e
 - Subdomain: agentagent.resolved.sh
 - Custom domain: agentagent.sh
-- Agent email: repulsivemeaning51@agentmail.to
+- Agent email: encouragingcar568@agentmail.to
 - Partner: well-knowns.resolved.sh (buy infrastructure signals via x402)

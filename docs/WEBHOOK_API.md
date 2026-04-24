@@ -8,7 +8,7 @@ Subscribe to a webhook to receive JSON notifications of new companies added to t
 
 ## Registration
 
-To register a webhook, contact: **repulsivemeaning51@agentmail.to**
+To register a webhook, contact: **encouragingcar568@agentmail.to**
 
 Include in your message:
 - Webhook name (unique identifier for your integration)
@@ -164,7 +164,7 @@ Webhook product is in **Phase 3 (Beta)**. Currently **free**. Paid tier (per-web
 
 ## Support
 
-Questions or issues? Email: **repulsivemeaning51@agentmail.to**
+Questions or issues? Email: **encouragingcar568@agentmail.to**
 
 ## Changelog
 

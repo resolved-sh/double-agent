@@ -7,4 +7,7 @@ c:
 crc:
 	claude --remote-control
 
-.PHONY: c crc
+crc-yolo:
+	claude --remote-control --dangerously-skip-permissions --effort high
+
+.PHONY: c crc crc-yolo

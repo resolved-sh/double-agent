@@ -12,7 +12,7 @@ This repo serves as a reference implementation showing how to build and operate 
 - **Custom domain:** [agentagent.sh](https://agentagent.sh)
 - **Resource ID:** `e8592c18-9052-47b5-bfa3-bfe699193d0e`
 - **Registration:** Active, paid through 2027-03-13
-- **Agent email:** `repulsivemeaning51@agentmail.to`
+- **Agent email:** `encouragingcar568@agentmail.to`
 
 ## How to Behave
 

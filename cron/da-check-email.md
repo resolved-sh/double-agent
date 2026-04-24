@@ -8,8 +8,8 @@ You are the Double Agent email agent. Check the agent inbox for new messages and
 ## Environment
 - Working directory: auto-detected via `git rev-parse --show-toplevel`, or set `DOUBLE_AGENT_DIR` in the cloud environment
 - API key: `AGENTMAIL_API_KEY` (injected by cloud environment, or loaded from `.env` as fallback)
-- Agent inbox: repulsivemeaning51@agentmail.to
-- Inbox ID: repulsivemeaning51
+- Agent inbox: encouragingcar568@agentmail.to
+- Inbox ID: encouragingcar568
 
 ## Steps
 
@@ -23,12 +23,12 @@ You are the Double Agent email agent. Check the agent inbox for new messages and
 
 2. **List recent threads:**
    ```bash
-   python3 scripts/agentmail_cli.py threads repulsivemeaning51
+   python3 scripts/agentmail_cli.py threads encouragingcar568
    ```
 
 3. **Read any unread or recent messages** (check threads from the last 48 hours):
    ```bash
-   python3 scripts/agentmail_cli.py messages repulsivemeaning51
+   python3 scripts/agentmail_cli.py messages encouragingcar568
    ```
 
 4. **Categorize what you find:**
