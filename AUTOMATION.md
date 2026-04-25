@@ -95,17 +95,18 @@ Each business adds value the other cannot produce alone:
 - Both businesses pay each other at published prices — no special rates
 - Payments use x402 USDC on Base Mainnet, settled directly to each business's EVM wallet
 
-### Weekly schedule
+### Schedule
 
 | Time | Business | Task |
 |------|----------|------|
 | Sun night | Well Knowns | Crawl /.well-known/ endpoints, upload datasets |
-| Mon 7am | Double Agent | Buy WK enriched datasets, update company profiles, re-upload listings |
-| Mon 8am | Well Knowns | Run enrichment: buy DA index, produce x402-filtered datasets |
+| Mon 7am | Double Agent | Weekly enrichment — buy WK datasets, re-upload full/merged/weekly listings |
+| Mon 8am | Well Knowns | Run weekly enrichment: buy DA index, produce x402-filtered datasets |
 | Mon 9am | Double Agent | Publish weekly deep-research post |
 | Mon 10am | Double Agent | Publish weekly blog digest |
+| Daily 8am / 2pm / 8pm | Double Agent | Delta cycle — publish newly-merged PRs, conditionally re-buy WK datasets if they've bumped `updated_at` |
 
-> Note: DA's Mon 7am enrichment currently runs before WK's Mon 8am publish, so it reads the previous week's WK datasets. To close the loop within the same week, shift WK's enrichment earlier (e.g., Sun night) so DA's 7am run picks up fresh data.
+> Note: DA's Mon 7am enrichment currently runs before WK's Mon 8am publish, so it reads the previous week's WK datasets. To close the weekly loop within the same week, shift WK's enrichment earlier (e.g., Sun night) so DA's 7am run picks up fresh data. The 3×/day delta cycle is independent of this and reads whatever's currently published.
 
 ---
 
@@ -115,14 +116,19 @@ Each business adds value the other cannot produce alone:
 - DA weekly research post (scheduled, Mon 9am)
 - DA weekly blog digest (scheduled, Mon 10am)
 - DA weekly enrichment (scheduled, Mon 7am) — `da-weekly-enrich` SKILL
-- DA → WK purchase: `pipeline/enrich_with_wellknowns.py` (buys WK's x402-filtered datasets, enriches DA's index, re-uploads, emits Pulse event)
+- DA delta cycle (scheduled 3×/day at 8am/2pm/8pm) — `da-delta-cycle` SKILL
+- DA delta detection: `scripts/github_delta.py` (diffs the full index against `data/delta_checkpoint.json`, writes `data/delta_output.jsonl`)
+- DA delta publish: `scripts/publish_delta.py` (uploads `x402_new_activity_feed.jsonl` at $0.10 query / $0.50 download, emits `data_upload` Pulse event, persists file UUID to `data/delta_listing_id.txt`)
+- DA → WK purchase: `pipeline/enrich_with_wellknowns.py` — now caches by listing `updated_at` (skips x402 spend when WK hasn't bumped) and opportunistically buys WK's `x402-new-activity.jsonl` if published
 - WK → DA purchase: `pipeline/enrich.py` buys DA's x402 index
 - WK crawl pipeline: `bash scripts/cycle.sh`
 
 ### 🔲 Still needed
-- WK scheduled tasks in Claude Desktop (weekly crawl, upload, enrichment) — and shift WK enrichment earlier than Mon 7am so DA's enrichment reads same-week data
-- Pulse events for WK on data publish (DA emits via the enrichment script; WK side still pending)
+- WK scheduled tasks in Claude Desktop (weekly crawl, upload, enrichment) — and shift WK enrichment earlier than Mon 7am so DA's weekly enrichment reads same-week data
+- WK delta-publish counterpart: WK should publish its own high-frequency `x402-new-activity.jsonl` so DA's delta cycle has a corresponding fresh-buy on every fire
+- Pulse events for WK on data publish (DA emits via the enrichment + delta-publish scripts; WK side still pending)
 - WK dataset specifically sized for DA purchase: `x402-companies-full-infra-{date}.jsonl`
+- Define the schema for `x402-new-activity.jsonl` so DA can fold it into enrichment instead of just caching the bytes
 - Test the full loop end-to-end
 
 ---
