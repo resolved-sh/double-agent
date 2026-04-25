@@ -56,6 +56,15 @@ log = logging.getLogger("enrich-wk")
 WK_BASE  = "https://well-knowns.resolved.sh"
 WK_FILES = ["x402-agent-cards", "x402-mcp-infrastructure", "x402-wellknown-overview"]
 
+# Stable-name high-frequency activity feed WK may publish. Bought opportunistically
+# (404 is fine); we cache the bytes for downstream use without enriching against
+# it yet — schema isn't pinned down on the WK side.
+WK_ACTIVITY_FILE = "x402-new-activity.jsonl"
+
+# Records the latest updated_at we've already paid for, keyed by file URL.
+# Lets us short-circuit purchases when WK hasn't bumped the listing.
+LAST_PURCHASED_FILE = CACHE_DIR / "wk_last_purchased.json"
+
 DA_RESOURCE_ID = "e8592c18-9052-47b5-bfa3-bfe699193d0e"
 DA_SUBDOMAIN   = "agentagent"
 
@@ -196,6 +205,75 @@ def _parse_jsonl_bytes(content: bytes) -> list[dict]:
         except json.JSONDecodeError:
             pass
     return out
+
+
+# ── Conditional-purchase cache (by listing updated_at) ────────────────────────
+def load_last_purchased() -> dict:
+    if LAST_PURCHASED_FILE.exists():
+        try:
+            return json.loads(LAST_PURCHASED_FILE.read_text())
+        except json.JSONDecodeError:
+            log.warning("%s is corrupt — starting fresh", LAST_PURCHASED_FILE.name)
+    return {}
+
+
+def save_last_purchased(state: dict) -> None:
+    LAST_PURCHASED_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LAST_PURCHASED_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
+
+
+def get_listing_updated_at(file_url: str) -> str:
+    """Best-effort: fetch the listing's public JSON view and pick out the file's
+    updated_at. Returns ISO timestamp or '' when unavailable. Failure → '' (caller
+    treats that as "can't determine, fall through to existing date-cache logic")."""
+    try:
+        scheme, rest = file_url.split("://", 1)
+        host = rest.split("/", 1)[0]
+        filename = file_url.rsplit("/", 1)[-1]
+        root = f"{scheme}://{host}"
+        r = httpx.get(root, headers={"Accept": "application/json"}, timeout=10.0)
+        if r.status_code != 200:
+            return ""
+        body = r.json()
+        files = body.get("files") or body.get("data_files") or []
+        for f in files:
+            if f.get("filename") == filename:
+                return f.get("updated_at") or f.get("modified_at") or ""
+    except Exception as e:
+        log.debug("get_listing_updated_at(%s) failed: %s", file_url, e)
+    return ""
+
+
+def find_latest_cache(stem: str) -> Path | None:
+    """Most-recently-modified pipeline/cache/wk_{stem}_*.jsonl, or None."""
+    candidates = sorted(
+        CACHE_DIR.glob(f"wk_{stem}_*.jsonl"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    return candidates[0] if candidates else None
+
+
+def fetch_wk_dataset(stem: str, url: str, last_purchased: dict) -> list[dict]:
+    """Fetch a WK dataset. Skip the x402 purchase if the listing's updated_at
+    matches what we already paid for (and a local cache copy exists)."""
+    updated_at = get_listing_updated_at(url)
+
+    if updated_at and last_purchased.get(url) == updated_at:
+        cached = find_latest_cache(stem)
+        if cached and cached.exists():
+            log.info("  %s: skip purchase (already at version %s, using %s)",
+                     stem, updated_at, cached.name)
+            return _parse_jsonl_bytes(cached.read_bytes())
+        log.info("  %s: updated_at unchanged but no cache on disk — purchasing", stem)
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    cache = CACHE_DIR / f"wk_{stem}_{today}.jsonl"
+    records = x402_download(url, cache)
+    if records and updated_at:
+        last_purchased[url] = updated_at
+        save_last_purchased(last_purchased)
+    return records
 
 
 def x402_download(url: str, cache_path: Path) -> list[dict]:
@@ -393,12 +471,19 @@ def main() -> None:
     date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     log.info("=== Purchasing WK datasets (date=%s) ===", date)
+    last_purchased = load_last_purchased()
     wk = {}
     for stem in WK_FILES:
-        url   = f"{WK_BASE}/data/{stem}-{date}.jsonl"
-        cache = CACHE_DIR / f"wk_{stem}_{date}.jsonl"
-        wk[stem] = x402_download(url, cache)
+        url = f"{WK_BASE}/data/{stem}-{date}.jsonl"
+        wk[stem] = fetch_wk_dataset(stem, url, last_purchased)
         log.info("  %s: %d records", stem, len(wk[stem]))
+
+    # Optional high-frequency activity feed (stable filename, no date suffix).
+    # Bought when WK publishes one; logged but not yet folded into enrichment
+    # because the schema isn't pinned down on the WK side.
+    activity_url = f"{WK_BASE}/data/{WK_ACTIVITY_FILE}"
+    wk_activity  = fetch_wk_dataset("x402-new-activity", activity_url, last_purchased)
+    log.info("  x402-new-activity: %d records (cached for future enrichment)", len(wk_activity))
 
     if not any(wk.values()):
         log.error("All three WK datasets are empty — nothing to enrich. Aborting.")
