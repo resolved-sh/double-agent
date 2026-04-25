@@ -100,10 +100,12 @@ Each business adds value the other cannot produce alone:
 | Time | Business | Task |
 |------|----------|------|
 | Sun night | Well Knowns | Crawl /.well-known/ endpoints, upload datasets |
+| Mon 7am | Double Agent | Buy WK enriched datasets, update company profiles, re-upload listings |
 | Mon 8am | Well Knowns | Run enrichment: buy DA index, produce x402-filtered datasets |
 | Mon 9am | Double Agent | Publish weekly deep-research post |
 | Mon 10am | Double Agent | Publish weekly blog digest |
-| Tue | Double Agent | Buy WK enriched dataset, update company profiles |
+
+> Note: DA's Mon 7am enrichment currently runs before WK's Mon 8am publish, so it reads the previous week's WK datasets. To close the loop within the same week, shift WK's enrichment earlier (e.g., Sun night) so DA's 7am run picks up fresh data.
 
 ---
 
@@ -112,13 +114,14 @@ Each business adds value the other cannot produce alone:
 ### ✅ Built
 - DA weekly research post (scheduled, Mon 9am)
 - DA weekly blog digest (scheduled, Mon 10am)
+- DA weekly enrichment (scheduled, Mon 7am) — `da-weekly-enrich` SKILL
+- DA → WK purchase: `pipeline/enrich_with_wellknowns.py` (buys WK's x402-filtered datasets, enriches DA's index, re-uploads, emits Pulse event)
 - WK → DA purchase: `pipeline/enrich.py` buys DA's x402 index
 - WK crawl pipeline: `bash scripts/cycle.sh`
 
 ### 🔲 Still needed
-- WK scheduled tasks in Claude Desktop (weekly crawl, upload, enrichment)
-- DA → WK purchase: `pipeline/enrich_with_wellknowns.py` (buys WK's x402-filtered dataset)
-- Pulse events for both businesses on data publish
+- WK scheduled tasks in Claude Desktop (weekly crawl, upload, enrichment) — and shift WK enrichment earlier than Mon 7am so DA's enrichment reads same-week data
+- Pulse events for WK on data publish (DA emits via the enrichment script; WK side still pending)
 - WK dataset specifically sized for DA purchase: `x402-companies-full-infra-{date}.jsonl`
 - Test the full loop end-to-end
 
