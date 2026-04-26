@@ -61,8 +61,8 @@ WK_FILES = ["x402-agent-cards", "x402-mcp-infrastructure", "x402-wellknown-overv
 # it yet — schema isn't pinned down on the WK side.
 WK_ACTIVITY_FILE = "x402-new-activity.jsonl"
 
-# Records the latest updated_at we've already paid for, keyed by file URL.
-# Lets us short-circuit purchases when WK hasn't bumped the listing.
+# Records the date (YYYY-MM-DD) we last paid for each dataset, keyed by stem.
+# Caps spend at one purchase per dataset per day — no metadata comparison.
 LAST_PURCHASED_FILE = CACHE_DIR / "wk_last_purchased.json"
 
 DA_RESOURCE_ID = "e8592c18-9052-47b5-bfa3-bfe699193d0e"
@@ -207,7 +207,7 @@ def _parse_jsonl_bytes(content: bytes) -> list[dict]:
     return out
 
 
-# ── Conditional-purchase cache (by listing updated_at) ────────────────────────
+# ── Daily-max-one-purchase cache ──────────────────────────────────────────────
 def load_last_purchased() -> dict:
     if LAST_PURCHASED_FILE.exists():
         try:
@@ -222,56 +222,26 @@ def save_last_purchased(state: dict) -> None:
     LAST_PURCHASED_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
-def get_listing_updated_at(file_url: str) -> str:
-    """Best-effort: fetch the listing's public JSON view and pick out the file's
-    updated_at. Returns ISO timestamp or '' when unavailable. Failure → '' (caller
-    treats that as "can't determine, fall through to existing date-cache logic")."""
-    try:
-        scheme, rest = file_url.split("://", 1)
-        host = rest.split("/", 1)[0]
-        filename = file_url.rsplit("/", 1)[-1]
-        root = f"{scheme}://{host}"
-        r = httpx.get(root, headers={"Accept": "application/json"}, timeout=10.0)
-        if r.status_code != 200:
-            return ""
-        body = r.json()
-        files = body.get("files") or body.get("data_files") or []
-        for f in files:
-            if f.get("filename") == filename:
-                return f.get("updated_at") or f.get("modified_at") or ""
-    except Exception as e:
-        log.debug("get_listing_updated_at(%s) failed: %s", file_url, e)
-    return ""
-
-
-def find_latest_cache(stem: str) -> Path | None:
-    """Most-recently-modified pipeline/cache/wk_{stem}_*.jsonl, or None."""
-    candidates = sorted(
-        CACHE_DIR.glob(f"wk_{stem}_*.jsonl"),
-        key=lambda p: p.stat().st_mtime,
-        reverse=True,
-    )
-    return candidates[0] if candidates else None
-
-
 def fetch_wk_dataset(stem: str, url: str, last_purchased: dict) -> list[dict]:
-    """Fetch a WK dataset. Skip the x402 purchase if the listing's updated_at
-    matches what we already paid for (and a local cache copy exists)."""
-    updated_at = get_listing_updated_at(url)
-
-    if updated_at and last_purchased.get(url) == updated_at:
-        cached = find_latest_cache(stem)
-        if cached and cached.exists():
-            log.info("  %s: skip purchase (already at version %s, using %s)",
-                     stem, updated_at, cached.name)
-            return _parse_jsonl_bytes(cached.read_bytes())
-        log.info("  %s: updated_at unchanged but no cache on disk — purchasing", stem)
-
+    """Buy each dataset at most once per UTC day. If we already paid today, return
+    today's cached file (or [] if the cache is missing). x402_download itself also
+    short-circuits on cache-hit, so a re-run on the same day spends nothing."""
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     cache = CACHE_DIR / f"wk_{stem}_{today}.jsonl"
+
+    if last_purchased.get(stem) == today:
+        if cache.exists():
+            log.info("  %s: already bought today (%s), using cached file", stem, today)
+            return _parse_jsonl_bytes(cache.read_bytes())
+        log.info("  %s: marked as bought today but cache file missing — skipping", stem)
+        return []
+
     records = x402_download(url, cache)
-    if records and updated_at:
-        last_purchased[url] = updated_at
+    # Mark as bought once we've gotten any successful response — x402_download
+    # only writes the cache file on 200, so its presence is the success signal
+    # (and an empty 200 body is a valid "no rows today" response we shouldn't retry).
+    if cache.exists():
+        last_purchased[stem] = today
         save_last_purchased(last_purchased)
     return records
 
