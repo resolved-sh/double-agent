@@ -1,0 +1,543 @@
+[
+  {
+    "domain": "vnexpress.net",
+    "rank": 1184,
+    "crawled_at": "2026-04-13T23:42:11.594214+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "psychcentral.com",
+    "rank": 7335,
+    "crawled_at": "2026-04-14T01:16:50.650493+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.fun",
+    "rank": 14360,
+    "crawled_at": "2026-04-14T03:28:23.809331+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.live",
+    "rank": 19792,
+    "crawled_at": "2026-04-14T05:24:24.445423+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "blurams.com",
+    "rank": 20901,
+    "crawled_at": "2026-04-14T05:48:40.400489+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "greatist.com",
+    "rank": 22905,
+    "crawled_at": "2026-04-14T06:33:25.494934+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "shields.io",
+    "rank": 28963,
+    "crawled_at": "2026-04-14T21:16:51.415665+00:00",
+    "name": "404",
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "b23.tv",
+    "rank": 35272,
+    "crawled_at": "2026-04-15T01:48:08.583795+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.me",
+    "rank": 37534,
+    "crawled_at": "2026-04-15T02:49:42.309067+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "zhivika.ru",
+    "rank": 48687,
+    "crawled_at": "2026-04-15T08:15:16.234254+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "roadmap.sh",
+    "rank": 50018,
+    "crawled_at": "2026-04-15T08:56:37.512435+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "oast.site",
+    "rank": 54205,
+    "crawled_at": "2026-04-15T11:12:44.700808+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "blockcraft.co",
+    "rank": 62557,
+    "crawled_at": "2026-04-15T16:14:28.102948+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "apilayer.net",
+    "rank": 68920,
+    "crawled_at": "2026-04-15T20:32:21.363961+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "attio.com",
+    "rank": 74257,
+    "crawled_at": "2026-04-16T00:14:17.416807+00:00",
+    "name": "Attio",
+    "description": "AI CRM. Connect via MCP server or REST API.",
+    "url": "https://attio.com",
+    "version": "1.0.0",
+    "skills": [],
+    "capabilities": {
+      "pushNotifications": false,
+      "streaming": true
+    },
+    "default_input_modes": [
+      "text/plain",
+      "application/json"
+    ],
+    "default_output_modes": [
+      "text/plain",
+      "application/json"
+    ]
+  },
+  {
+    "domain": "gymbeam.sk",
+    "rank": 76156,
+    "crawled_at": "2026-04-16T01:39:27.534191+00:00",
+    "name": "GymBeam Slovakia",
+    "description": "GymBeam is a leading European sports nutrition and fitness e-commerce platform. This is the Slovakia store.",
+    "url": "https://gymbeam.sk",
+    "version": null,
+    "skills": [
+      {
+        "id": "product-search",
+        "name": "Product Search",
+        "description": "Search GymBeam product catalog including supplements, vitamins, sports nutrition, healthy food, and fitness accessories.",
+        "tags": [
+          "e-commerce",
+          "sports-nutrition",
+          "supplements",
+          "fitness",
+          "health"
+        ],
+        "examples": [
+          "What whey protein products does GymBeam offer?",
+          "Find creatine monohydrate supplements",
+          "What are the best-selling pre-workout products?",
+          "Show me vegan protein options"
+        ]
+      },
+      {
+        "id": "nutrition-info",
+        "name": "Nutrition Information",
+        "description": "Get detailed nutrition facts, ingredients, and allergen information for GymBeam products.",
+        "tags": [
+          "nutrition",
+          "ingredients",
+          "allergens",
+          "macros"
+        ],
+        "examples": [
+          "What are the nutrition facts for Just Whey protein?",
+          "Does this product contain gluten?",
+          "How much protein per serving in True Whey?"
+        ]
+      }
+    ],
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": false
+    },
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "jscloud.net",
+    "rank": 78854,
+    "crawled_at": "2026-04-16T03:40:21.486344+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "gymbeam.cz",
+    "rank": 80027,
+    "crawled_at": "2026-04-25T01:48:52.190937+00:00",
+    "name": "GymBeam Czechia",
+    "description": "GymBeam is a leading European sports nutrition and fitness e-commerce platform. This is the Czechia store.",
+    "url": "https://gymbeam.cz",
+    "version": null,
+    "skills": [
+      {
+        "id": "product-search",
+        "name": "Product Search",
+        "description": "Search GymBeam product catalog including supplements, vitamins, sports nutrition, healthy food, and fitness accessories.",
+        "tags": [
+          "e-commerce",
+          "sports-nutrition",
+          "supplements",
+          "fitness",
+          "health"
+        ],
+        "examples": [
+          "What whey protein products does GymBeam offer?",
+          "Find creatine monohydrate supplements",
+          "What are the best-selling pre-workout products?",
+          "Show me vegan protein options"
+        ]
+      },
+      {
+        "id": "nutrition-info",
+        "name": "Nutrition Information",
+        "description": "Get detailed nutrition facts, ingredients, and allergen information for GymBeam products.",
+        "tags": [
+          "nutrition",
+          "ingredients",
+          "allergens",
+          "macros"
+        ],
+        "examples": [
+          "What are the nutrition facts for Just Whey protein?",
+          "Does this product contain gluten?",
+          "How much protein per serving in True Whey?"
+        ]
+      }
+    ],
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": false
+    },
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "gymbeam.ro",
+    "rank": 81683,
+    "crawled_at": "2026-04-25T02:09:47.478470+00:00",
+    "name": "GymBeam Romania",
+    "description": "GymBeam is a leading European sports nutrition and fitness e-commerce platform. This is the Romania store.",
+    "url": "https://gymbeam.ro",
+    "version": null,
+    "skills": [
+      {
+        "id": "product-search",
+        "name": "Product Search",
+        "description": "Search GymBeam product catalog including supplements, vitamins, sports nutrition, healthy food, and fitness accessories.",
+        "tags": [
+          "e-commerce",
+          "sports-nutrition",
+          "supplements",
+          "fitness",
+          "health"
+        ],
+        "examples": [
+          "What whey protein products does GymBeam offer?",
+          "Find creatine monohydrate supplements",
+          "What are the best-selling pre-workout products?",
+          "Show me vegan protein options"
+        ]
+      },
+      {
+        "id": "nutrition-info",
+        "name": "Nutrition Information",
+        "description": "Get detailed nutrition facts, ingredients, and allergen information for GymBeam products.",
+        "tags": [
+          "nutrition",
+          "ingredients",
+          "allergens",
+          "macros"
+        ],
+        "examples": [
+          "What are the nutrition facts for Just Whey protein?",
+          "Does this product contain gluten?",
+          "How much protein per serving in True Whey?"
+        ]
+      }
+    ],
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": false
+    },
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "loi.com.uy",
+    "rank": 84373,
+    "crawled_at": "2026-04-25T02:52:10.226107+00:00",
+    "name": "LOi Uruguay",
+    "description": "LOi Uruguay is a multi-category e-commerce platform \u2014 La Oferta Irresistible. Search products, browse categories, check prices and availability, find deals, and get shipping estimates across technology, home, beauty, sports, fashion, and more. Prices in UYU and USD. Content in Spanish.",
+    "url": "https://loi.com.uy",
+    "version": "1.0.0",
+    "skills": [
+      {
+        "id": "product-search",
+        "name": "Product Search",
+        "description": "Search the LOi Uruguay catalog by keyword, brand, category, or price range. Returns product name, price, currency, availability, images, and direct links.",
+        "tags": [
+          "search",
+          "products",
+          "e-commerce",
+          "catalog"
+        ],
+        "examples": [
+          "Find Samsung phones under $30000",
+          "Search for Nike running shoes",
+          "What perfumes are available?"
+        ]
+      },
+      {
+        "id": "product-details",
+        "name": "Product Details",
+        "description": "Retrieve full product information including specifications, images, reviews, stock status, shipping options, and pricing history.",
+        "tags": [
+          "product",
+          "details",
+          "specifications",
+          "reviews",
+          "pricing"
+        ],
+        "examples": [
+          "Show me details for iPhone 16 Pro",
+          "What are the specs of this notebook?",
+          "Is this product in stock?"
+        ]
+      },
+      {
+        "id": "category-browse",
+        "name": "Category Browsing",
+        "description": "Browse product categories and subcategories. LOi Uruguay covers technology, home appliances, furniture, beauty, sports, toys, fashion, and more.",
+        "tags": [
+          "categories",
+          "browse",
+          "navigation",
+          "catalog"
+        ],
+        "examples": [
+          "What categories does LOi sell?",
+          "Show me all beauty products",
+          "Browse gaming consoles"
+        ]
+      },
+      {
+        "id": "deals-offers",
+        "name": "Deals & Offers",
+        "description": "Find current promotions, hot sale items, and special offers across all categories.",
+        "tags": [
+          "deals",
+          "offers",
+          "promotions",
+          "discounts",
+          "hot-sale"
+        ],
+        "examples": [
+          "What are today's best deals?",
+          "Show me irresistible offers on TVs",
+          "Any discounts on perfumes?"
+        ]
+      },
+      {
+        "id": "shipping-info",
+        "name": "Shipping Information",
+        "description": "Check shipping options, estimated delivery times, and costs. LOi offers flash delivery (2 hours in Montevideo area), same-day, and standard shipping.",
+        "tags": [
+          "shipping",
+          "delivery",
+          "logistics",
+          "flash-delivery"
+        ],
+        "examples": [
+          "How fast can I get delivery in Montevideo?",
+          "What are the shipping costs?",
+          "Does this product qualify for free shipping?"
+        ]
+      },
+      {
+        "id": "brand-catalog",
+        "name": "Brand Catalog",
+        "description": "Browse products by brand. LOi carries 500+ brands including Samsung, Apple, Nike, L'Or\u00e9al, and many more.",
+        "tags": [
+          "brands",
+          "manufacturers",
+          "official-stores"
+        ],
+        "examples": [
+          "What Apple products are available?",
+          "Show me all Samsung TVs",
+          "Which brands does LOi carry?"
+        ]
+      }
+    ],
+    "capabilities": {
+      "streaming": true,
+      "pushNotifications": false
+    },
+    "default_input_modes": [
+      "text/plain"
+    ],
+    "default_output_modes": [
+      "application/json",
+      "text/plain"
+    ]
+  },
+  {
+    "domain": "getepicapi.com",
+    "rank": 85865,
+    "crawled_at": "2026-04-25T03:17:26.986202+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "anti-zapret.com",
+    "rank": 86538,
+    "crawled_at": "2026-04-25T03:29:33.077758+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "qbb6.com",
+    "rank": 97222,
+    "crawled_at": "2026-04-25T07:15:06.952400+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  },
+  {
+    "domain": "gamesvessel.com",
+    "rank": 99814,
+    "crawled_at": "2026-04-25T07:57:15.095413+00:00",
+    "name": null,
+    "description": null,
+    "url": null,
+    "version": null,
+    "skills": [],
+    "capabilities": {},
+    "default_input_modes": [],
+    "default_output_modes": []
+  }
+]
