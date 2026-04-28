@@ -444,7 +444,9 @@ def main() -> None:
     last_purchased = load_last_purchased()
     wk = {}
     for stem in WK_FILES:
-        url = f"{WK_BASE}/data/{stem}-{date}.jsonl"
+        # WK now publishes under stable -latest filenames; freshness is governed
+        # by the daily-max-one-purchase cache, not by date in the URL.
+        url = f"{WK_BASE}/data/{stem}-latest.jsonl"
         wk[stem] = fetch_wk_dataset(stem, url, last_purchased)
         log.info("  %s: %d records", stem, len(wk[stem]))
 

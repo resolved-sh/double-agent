@@ -19,6 +19,8 @@ merged_at: null.)
 """
 
 import json
+import os
+import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -28,6 +30,9 @@ FULL_INDEX = REPO_ROOT / "public" / "flat_x402_ecosystem_full_index.jsonl"
 DATA_DIR   = REPO_ROOT / "data"
 DELTA_OUT  = DATA_DIR / "delta_output.jsonl"
 CHECKPOINT = DATA_DIR / "delta_checkpoint.json"
+
+DA_RESOURCE_ID = "e8592c18-9052-47b5-bfa3-bfe699193d0e"
+DA_SUBDOMAIN   = "agentagent"
 
 
 def load_checkpoint() -> dict:
@@ -60,6 +65,40 @@ def load_full_index() -> list[dict]:
             except json.JSONDecodeError:
                 continue
     return out
+
+
+def load_env_soft() -> bool:
+    """Soft-load .env into os.environ. Returns True if RESOLVED_SH_API_KEY ends up set."""
+    env_file = REPO_ROOT / ".env"
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, _, val = line.partition("=")
+                if key not in os.environ:
+                    os.environ[key] = val.strip().strip('"').strip("'")
+    return bool(os.environ.get("RESOLVED_SH_API_KEY"))
+
+
+def emit_heartbeat(prs_checked: int, new_records: int) -> None:
+    """Fire-and-forget Pulse `monitor` heartbeat. Logs failures, never raises —
+    observability must not break the delta cycle."""
+    if not load_env_soft():
+        print("WARN: RESOLVED_SH_API_KEY not set — skipping heartbeat", file=sys.stderr)
+        return
+    payload = json.dumps({
+        "status":       "healthy",
+        "prs_checked":  prs_checked,
+        "new_records":  new_records,
+    })
+    cmd = [
+        sys.executable,
+        str(REPO_ROOT / "scripts" / "resolved_sh.py"),
+        "emit-event", DA_SUBDOMAIN, "monitor", payload,
+    ]
+    rc = subprocess.call(cmd)
+    if rc != 0:
+        print(f"WARN: heartbeat emit-event exited {rc}", file=sys.stderr)
 
 
 def newly_merged(records: list[dict], since_iso: str) -> list[dict]:
@@ -96,6 +135,8 @@ def main() -> None:
     print(f"Wrote {DELTA_OUT.relative_to(REPO_ROOT)}")
     print(f"Checkpoint advanced: last_checked_at={new_cp['last_checked_at']}, "
           f"last_pr_number={new_cp['last_pr_number']}")
+
+    emit_heartbeat(prs_checked=len(records), new_records=len(delta))
 
 
 if __name__ == "__main__":
