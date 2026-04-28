@@ -46,10 +46,32 @@ File UUIDs:
 import sys
 import os
 import json
+import re
 import argparse
 import requests
 
 BASE = "https://resolved.sh"
+
+# Filenames matching <base>-<YYYY-MM-DD|latest>.<ext> are versioned datasets.
+# Stable-named files (no date/'latest' suffix) don't trigger cleanup.
+_VERSION_RE = re.compile(
+    r"^(.+)-(\d{4}-\d{2}-\d{2}|latest)\.(jsonl|json|csv|txt)$",
+    re.IGNORECASE,
+)
+
+
+def _version_parts(filename: str):
+    """Return (base, suffix) when the filename has a date/'latest' version
+    suffix; None otherwise. Suffix is normalized to lowercase."""
+    m = _VERSION_RE.match(filename)
+    if not m:
+        return None
+    return m.group(1), m.group(2).lower()
+
+
+def _version_sort_key(suffix: str) -> str:
+    """latest > YYYY-MM-DD descending. Sortable as a plain string."""
+    return "9999-99-99" if suffix == "latest" else suffix
 
 # Pricing table for dataset uploads.
 # query    — per filtered query call; None = not queryable (download-only)
@@ -169,10 +191,55 @@ def cmd_upload(resource_id, filepath, price_usdc, query_price_usdc=None,
         params=params,
         data=content,
     )
-    r.raise_for_status()
+    if r.status_code != 201:
+        print(f"ERROR: upload expected 201, got {r.status_code}: {r.text[:400]}",
+              file=sys.stderr)
+        sys.exit(1)
     result = r.json()
     print(json.dumps(result, indent=2))
     _print_pricing(result)
+
+    cleanup_old_versions(resource_id, filename)
+
+
+def cleanup_old_versions(resource_id, just_uploaded_filename, keep=2):
+    """After upload, prune sibling files that share the same base pattern,
+    keeping only the most recent `keep`. No-op for stable-named files (no
+    date/'latest' suffix). The 'latest' alias always sorts to the top, so
+    when WK publishes both `name-YYYY-MM-DD.jsonl` and `name-latest.jsonl`,
+    the alias is preserved and only stale dated versions get pruned."""
+    parts = _version_parts(just_uploaded_filename)
+    if parts is None:
+        return
+    base, _ = parts
+
+    r = requests.get(f"{BASE}/listing/{resource_id}/data", headers=headers())
+    if r.status_code != 200:
+        print(f"WARN: cleanup list failed {r.status_code}: {r.text[:200]}",
+              file=sys.stderr)
+        return
+
+    siblings = []
+    for f in r.json().get("files", []):
+        fp = _version_parts(f.get("filename", ""))
+        if fp and fp[0] == base:
+            siblings.append((f, fp[1]))
+
+    siblings.sort(key=lambda t: _version_sort_key(t[1]), reverse=True)
+    for f, _suffix in siblings[keep:]:
+        fid = f.get("id")
+        fname = f.get("filename", "?")
+        if not fid:
+            continue
+        d = requests.delete(
+            f"{BASE}/listing/{resource_id}/data/{fid}",
+            headers=headers(),
+        )
+        if d.status_code == 204:
+            print(f"  cleanup: DELETE {fname} ({fid})")
+        else:
+            print(f"  WARN: cleanup DELETE failed {d.status_code} for {fname}: {d.text[:200]}",
+                  file=sys.stderr)
 
 
 def cmd_list_files(resource_id):

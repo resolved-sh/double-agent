@@ -88,8 +88,9 @@ def upload(api_key: str, filepath: Path) -> dict:
         params=params,
         data=body,
     )
-    if r.status_code not in (200, 201):
-        print(f"ERROR: upload failed {r.status_code}: {r.text[:400]}", file=sys.stderr)
+    if r.status_code != 201:
+        print(f"ERROR: upload expected 201, got {r.status_code}: {r.text[:400]}",
+              file=sys.stderr)
         sys.exit(1)
     return r.json()
 
