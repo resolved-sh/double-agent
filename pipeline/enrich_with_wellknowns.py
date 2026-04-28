@@ -222,53 +222,82 @@ def save_last_purchased(state: dict) -> None:
     LAST_PURCHASED_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
-def fetch_wk_dataset(stem: str, url: str, last_purchased: dict) -> list[dict]:
-    """Buy each dataset at most once per UTC day. If we already paid today, return
-    today's cached file (or [] if the cache is missing). x402_download itself also
-    short-circuits on cache-hit, so a re-run on the same day spends nothing."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    cache = CACHE_DIR / f"wk_{stem}_{today}.jsonl"
+def emit_sync_purchase(filename: str, records: int, amount_usdc: float) -> None:
+    """Best-effort `sync` Pulse event emitted right after a successful x402 buy.
+    Fire-and-forget: timeout, non-zero exit, and exceptions are all logged at
+    WARN and never raise — the enrichment must not depend on Pulse availability."""
+    payload = json.dumps({
+        "dataset":           filename,
+        "records_purchased": records,
+        "amount_usdc":       round(amount_usdc, 6),
+    })
+    cmd = [
+        sys.executable, str(SCRIPTS / "resolved_sh.py"),
+        "emit-event", DA_SUBDOMAIN, "sync", payload,
+    ]
+    try:
+        result = subprocess.run(cmd, timeout=15, check=False)
+        if result.returncode != 0:
+            log.warning("sync Pulse for %s exited %d (non-fatal)",
+                        filename, result.returncode)
+    except subprocess.TimeoutExpired:
+        log.warning("sync Pulse for %s timed out (non-fatal)", filename)
+    except Exception as e:
+        log.warning("sync Pulse for %s raised %s (non-fatal)", filename, e)
 
-    if last_purchased.get(stem) == today:
+
+def fetch_wk_dataset(stem: str, url: str, last_purchased: dict) -> list[dict]:
+    """Buy each dataset at most once per UTC hour. If we already paid this hour,
+    return the hour's cached file (or [] if the cache is missing). x402_download
+    short-circuits on cache-hit, so a re-run within the same hour spends nothing.
+    Emits a `sync` Pulse event whenever an x402 payment actually goes through."""
+    hour_key = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
+    cache = CACHE_DIR / f"wk_{stem}_{hour_key}.jsonl"
+
+    if last_purchased.get(stem) == hour_key:
         if cache.exists():
-            log.info("  %s: already bought today (%s), using cached file", stem, today)
+            log.info("  %s: already bought this hour (%s), using cached file", stem, hour_key)
             return _parse_jsonl_bytes(cache.read_bytes())
-        log.info("  %s: marked as bought today but cache file missing — skipping", stem)
+        log.info("  %s: marked as bought this hour but cache file missing — skipping", stem)
         return []
 
-    records = x402_download(url, cache)
+    records, amount_paid = x402_download(url, cache)
+    if amount_paid > 0:
+        emit_sync_purchase(url.rsplit("/", 1)[-1], len(records), amount_paid)
     # Mark as bought once we've gotten any successful response — x402_download
     # only writes the cache file on 200, so its presence is the success signal
-    # (and an empty 200 body is a valid "no rows today" response we shouldn't retry).
+    # (an empty 200 body is a valid "no rows this hour" we shouldn't retry).
     if cache.exists():
-        last_purchased[stem] = today
+        last_purchased[stem] = hour_key
         save_last_purchased(last_purchased)
     return records
 
 
-def x402_download(url: str, cache_path: Path) -> list[dict]:
-    """Probe url; on 402 sign payment and retry. Cache on success. Returns parsed JSONL."""
+def x402_download(url: str, cache_path: Path) -> tuple[list[dict], float]:
+    """Probe url; on 402 sign payment and retry. Cache on success. Returns
+    (parsed records, amount_paid_usdc). amount_paid is 0 when served from cache
+    or via free 200, > 0 only when an x402 payment actually went through."""
     if cache_path.exists():
         log.info("Using cached file: %s", cache_path.name)
-        return _parse_jsonl_bytes(cache_path.read_bytes())
+        return _parse_jsonl_bytes(cache_path.read_bytes()), 0.0
 
     log.info("Fetching: %s", url)
     with httpx.Client(timeout=30.0) as client:
         r = client.get(url)
         if r.status_code == 200:
             cache_path.write_bytes(r.content)
-            return _parse_jsonl_bytes(r.content)
+            return _parse_jsonl_bytes(r.content), 0.0
         if r.status_code == 404:
             log.warning("Not found (404): %s — WK dataset for this date may not exist yet", url)
-            return []
+            return [], 0.0
         if r.status_code != 402:
             log.error("Unexpected status %d for %s: %s", r.status_code, url, r.text[:200])
-            return []
+            return [], 0.0
 
         accepts = r.json().get("accepts", [])
         if not accepts:
             log.error("No accepts in 402 response: %s", r.text[:300])
-            return []
+            return [], 0.0
         accept = accepts[0]
         amount_usdc = int(accept["amount"]) / 1_000_000
         log.info("Payment required: $%.4f USDC to %s", amount_usdc, accept["payTo"])
@@ -283,12 +312,12 @@ def x402_download(url: str, cache_path: Path) -> list[dict]:
         r2 = client.get(url, headers={"PAYMENT-SIGNATURE": proof})
         if r2.status_code != 200:
             log.error("Payment failed (%d): %s", r2.status_code, r2.text[:300])
-            return []
+            return [], 0.0
 
         cache_path.write_bytes(r2.content)
         log.info("Paid $%.4f, downloaded %d bytes → %s",
                  amount_usdc, len(r2.content), cache_path.name)
-        return _parse_jsonl_bytes(r2.content)
+        return _parse_jsonl_bytes(r2.content), amount_usdc
 
 
 # ── Domain helpers ────────────────────────────────────────────────────────────
