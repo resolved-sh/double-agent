@@ -93,3 +93,43 @@
 2026-04-25 23:17:15,549 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
 2026-04-25 23:17:15,552 INFO   x402-new-activity: 0 records (cached for future enrichment)
 2026-04-25 23:17:15,553 ERROR All three WK datasets are empty — nothing to enrich. Aborting.
+2026-04-28 02:19:16,218 ERROR eth_account not installed. Run: python3 -m pip install eth_account
+2026-04-28 02:19:28,732 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 02:19:28,733 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 02:19:28,733 INFO Fetching: https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl
+2026-04-28 02:19:29,074 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:19:29,075 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:19:29,076 INFO   x402-agent-cards: 0 records
+2026-04-28 02:19:29,077 INFO Fetching: https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl
+2026-04-28 02:19:29,324 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:19:29,325 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:19:29,325 INFO   x402-mcp-infrastructure: 0 records
+2026-04-28 02:19:29,326 INFO Fetching: https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl
+2026-04-28 02:19:29,557 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:19:29,558 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:19:29,559 INFO   x402-wellknown-overview: 0 records
+2026-04-28 02:19:29,559 INFO Fetching: https://well-knowns.resolved.sh/data/x402-new-activity.jsonl
+2026-04-28 02:19:29,813 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-new-activity.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:19:29,814 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:19:29,814 INFO   x402-new-activity: 0 records (cached for future enrichment)
+2026-04-28 02:19:29,815 ERROR All three WK datasets are empty — nothing to enrich. Aborting.
+2026-04-28 02:25:51,192 ERROR eth_account not installed. Run: python3 -m pip install eth_account
+2026-04-28 02:26:03,958 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 02:26:03,958 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 02:26:03,959 INFO Fetching: https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl
+2026-04-28 02:26:04,889 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:26:04,891 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-agent-cards-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:26:04,892 INFO   x402-agent-cards: 0 records
+2026-04-28 02:26:04,893 INFO Fetching: https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl
+2026-04-28 02:26:05,142 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:26:05,143 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:26:05,144 INFO   x402-mcp-infrastructure: 0 records
+2026-04-28 02:26:05,144 INFO Fetching: https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl
+2026-04-28 02:26:05,413 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:26:05,414 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-wellknown-overview-2026-04-28.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:26:05,415 INFO   x402-wellknown-overview: 0 records
+2026-04-28 02:26:05,415 INFO Fetching: https://well-knowns.resolved.sh/data/x402-new-activity.jsonl
+2026-04-28 02:26:06,071 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-new-activity.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 02:26:06,073 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
+2026-04-28 02:26:06,074 INFO   x402-new-activity: 0 records (cached for future enrichment)
+2026-04-28 02:26:06,075 ERROR All three WK datasets are empty — nothing to enrich. Aborting.
