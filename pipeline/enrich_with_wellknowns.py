@@ -458,8 +458,8 @@ def main() -> None:
     log.info("  x402-new-activity: %d records (cached for future enrichment)", len(wk_activity))
 
     if not any(wk.values()):
-        log.error("All three WK datasets are empty — nothing to enrich. Aborting.")
-        sys.exit(1)
+        log.info("WK datasets not yet published, skipping enrichment.")
+        sys.exit(0)
 
     log.info("=== Loading DA company index ===")
     da_records = load_jsonl(DA_FLAT_FULL)
