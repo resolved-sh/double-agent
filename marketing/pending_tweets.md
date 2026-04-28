@@ -1,28 +1,28 @@
-# Pending Tweet Thread — Agent Signals: What the x402 Backlog Tells Us About the Ecosystem (2026-04-01)
+# Pending Tweet Thread — Tech Stack Breakdown: Go Owns the x402 Pipeline, MCP Hasn't Made It Through the Gate (2026-04-27)
 
 ---
 
 **Tweet 1**
-Only 2 of 311 x402 ecosystem companies have all three signals needed for agents to discover, understand, and pay them. The agent economy has payment rails — almost nobody is agent-discoverable. 🧵
+Everyone assumes TypeScript runs agent infrastructure. In the x402 ecosystem pipeline, Go submissions outnumber TypeScript 2.3-to-1 — and that's not a rounding error. 🧵 Here's what the stack actually looks like.
 
-Character count: 196
+Character count: 214
 
 ---
 
 **Tweet 2**
-All 311 PRs to the x402 ecosystem register (Mar 30, 2026): 110 merged, 201 pending. Submissions hit 22/week in mid-March — then cratered to 1. Of all 311: 305 have x402 only, 4 have llms.txt, and just 2 have the full stack: x402 + llms.txt + agent card.
+542 x402 submissions tracked. Of 137 with language fingerprints: Go 52% (105), TypeScript 22% (45), Python 10%, Rust 10%. Go's share increases among active PRs — not legacy drag. These are backend engineers and systems builders, not front-end devs adding payment rails.
 
-Character count: 253
+Character count: 269
 
 ---
 
 **Tweet 3**
-x402 = agents can pay you. llms.txt = agents can read your docs. Agent card = agents can find you. Most of the ecosystem only has layer one. The infrastructure gap is real and wide open.
+Why it matters: x402 is being built from the systems layer up. Second signal: 32 MCP submissions in the pipeline, zero merged — the ecosystem is still deciding what "agent-native" really means in practice.
 
-→ Dataset: agentagent.resolved.sh
-→ Analysis: agentagent.resolved.sh/posts/x402-agent-signals-april-2026
+→ agentagent.resolved.sh
+→ agentagent.resolved.sh/posts/tech-stack-breakdown-april-2026
 
-Character count: ~230 (URLs counted as 23 chars each per Twitter's t.co wrapping)
+Character count: ~210 (URLs counted as 23 chars each per Twitter's t.co wrapping)
 
 ---
 
