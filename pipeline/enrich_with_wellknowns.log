@@ -133,3 +133,141 @@
 2026-04-28 02:26:06,073 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
 2026-04-28 02:26:06,074 INFO   x402-new-activity: 0 records (cached for future enrichment)
 2026-04-28 02:26:06,075 ERROR All three WK datasets are empty — nothing to enrich. Aborting.
+2026-04-28 03:52:29,669 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 03:52:29,671 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 03:52:29,672 INFO Fetching: https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl
+2026-04-28 03:52:30,599 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 03:52:30,600 INFO Payment required: $0.2500 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 03:52:30,966 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 03:52:32,004 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 03:52:32,193 INFO Paid $0.2500, downloaded 0 bytes → wk_x402-agent-cards_2026-04-28T03.jsonl
+2026-04-28 03:52:32,581 WARNING sync Pulse for x402-agent-cards-latest.jsonl exited 1 (non-fatal)
+2026-04-28 03:52:32,583 INFO   x402-agent-cards: 0 records
+2026-04-28 03:52:32,584 INFO Fetching: https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl
+2026-04-28 03:52:32,836 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 03:52:32,839 INFO Payment required: $0.2500 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 03:52:33,142 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 03:52:34,831 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 03:52:34,956 INFO Paid $0.2500, downloaded 0 bytes → wk_x402-mcp-infrastructure_2026-04-28T03.jsonl
+2026-04-28 03:52:35,337 WARNING sync Pulse for x402-mcp-infrastructure-latest.jsonl exited 1 (non-fatal)
+2026-04-28 03:52:35,339 INFO   x402-mcp-infrastructure: 0 records
+2026-04-28 03:52:35,340 INFO Fetching: https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl
+2026-04-28 03:52:35,575 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 03:52:35,576 INFO Payment required: $0.5000 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 03:52:35,848 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 03:52:36,930 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 03:52:37,108 INFO Paid $0.5000, downloaded 989 bytes → wk_x402-wellknown-overview_2026-04-28T03.jsonl
+2026-04-28 03:52:37,458 WARNING sync Pulse for x402-wellknown-overview-latest.jsonl exited 1 (non-fatal)
+2026-04-28 03:52:37,460 INFO   x402-wellknown-overview: 4 records
+2026-04-28 03:52:37,461 INFO Fetching: https://well-knowns.resolved.sh/data/x402-new-activity.jsonl
+2026-04-28 03:52:38,060 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-new-activity.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 03:52:38,062 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
+2026-04-28 03:52:38,063 INFO   x402-new-activity: 0 records (cached for future enrichment)
+2026-04-28 03:52:38,064 INFO === Loading DA company index ===
+2026-04-28 03:52:38,080 INFO   436 DA company records
+2026-04-28 03:52:38,081 INFO === Enriching DA records with WK signals ===
+2026-04-28 03:52:38,082 INFO   agent-card matches: 0
+2026-04-28 03:52:38,083 INFO   mcp matches:        0
+2026-04-28 03:52:38,083 INFO   top-100k matches:   19
+2026-04-28 03:52:38,128 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index.jsonl
+2026-04-28 03:52:38,156 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index_2026-04-28.jsonl
+2026-04-28 03:52:38,187 INFO Wrote 436 rows → public/x402_ecosystem_full_index.jsonl
+2026-04-28 03:52:38,193 INFO Wrote 113 rows → public/flat_x402_ecosystem_merged_only.jsonl
+2026-04-28 03:52:38,199 INFO Wrote 113 rows → public/x402_ecosystem_merged_only.jsonl
+2026-04-28 03:52:38,206 INFO Wrote 40 rows → public/flat_x402_ecosystem_new_this_week.jsonl
+2026-04-28 03:52:38,213 INFO Wrote 40 rows → public/x402_ecosystem_new_this_week.jsonl
+2026-04-28 03:52:38,213 INFO === Uploading enriched listings to resolved.sh ===
+2026-04-28 03:52:38,214 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_full_index.jsonl 2.00
+2026-04-28 03:52:40,063 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_merged_only.jsonl 1.00
+2026-04-28 03:52:41,096 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_new_this_week.jsonl 0.50
+2026-04-28 03:52:42,053 INFO === Emitting Pulse event ===
+2026-04-28 03:52:42,054 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py emit-event agentagent task_completed {"task_type": "sync", "duration_seconds": 12.6, "success": true}
+2026-04-28 03:52:42,376 INFO === Enrichment loop complete in 12.9s ===
+2026-04-28 03:52:48,881 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 03:52:48,882 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 03:52:48,883 INFO   x402-agent-cards: already bought this hour (2026-04-28T03), using cached file
+2026-04-28 03:52:48,883 INFO   x402-agent-cards: 0 records
+2026-04-28 03:52:48,884 INFO   x402-mcp-infrastructure: already bought this hour (2026-04-28T03), using cached file
+2026-04-28 03:52:48,884 INFO   x402-mcp-infrastructure: 0 records
+2026-04-28 03:52:48,884 INFO   x402-wellknown-overview: already bought this hour (2026-04-28T03), using cached file
+2026-04-28 03:52:48,885 INFO   x402-wellknown-overview: 4 records
+2026-04-28 03:52:48,885 INFO Fetching: https://well-knowns.resolved.sh/data/x402-new-activity.jsonl
+2026-04-28 03:52:49,156 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-new-activity.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 03:52:49,157 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
+2026-04-28 03:52:49,158 INFO   x402-new-activity: 0 records (cached for future enrichment)
+2026-04-28 03:52:49,159 INFO === Loading DA company index ===
+2026-04-28 03:52:49,171 INFO   436 DA company records
+2026-04-28 03:52:49,172 INFO === Enriching DA records with WK signals ===
+2026-04-28 03:52:49,173 INFO   agent-card matches: 0
+2026-04-28 03:52:49,174 INFO   mcp matches:        0
+2026-04-28 03:52:49,174 INFO   top-100k matches:   19
+2026-04-28 03:52:49,224 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index.jsonl
+2026-04-28 03:52:49,262 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index_2026-04-28.jsonl
+2026-04-28 03:52:49,308 INFO Wrote 436 rows → public/x402_ecosystem_full_index.jsonl
+2026-04-28 03:52:49,314 INFO Wrote 113 rows → public/flat_x402_ecosystem_merged_only.jsonl
+2026-04-28 03:52:49,319 INFO Wrote 113 rows → public/x402_ecosystem_merged_only.jsonl
+2026-04-28 03:52:49,326 INFO Wrote 40 rows → public/flat_x402_ecosystem_new_this_week.jsonl
+2026-04-28 03:52:49,333 INFO Wrote 40 rows → public/x402_ecosystem_new_this_week.jsonl
+2026-04-28 03:52:49,333 INFO === Uploading enriched listings to resolved.sh ===
+2026-04-28 03:52:49,333 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_full_index.jsonl 2.00
+2026-04-28 03:52:53,316 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_merged_only.jsonl 1.00
+2026-04-28 03:52:54,270 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/jolly-nice-edison/mnt/double-agent/public/x402_ecosystem_new_this_week.jsonl 0.50
+2026-04-28 03:52:55,323 INFO === Emitting Pulse event ===
+2026-04-28 03:52:55,324 INFO $ /usr/bin/python /sessions/jolly-nice-edison/mnt/double-agent/scripts/resolved_sh.py emit-event agentagent task_completed {"task_type": "sync", "duration_seconds": 6.6, "success": true}
+2026-04-28 03:52:55,624 INFO === Enrichment loop complete in 6.9s ===
+2026-04-28 06:18:10,148 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 06:18:10,150 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 06:18:10,151 INFO Fetching: https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl
+2026-04-28 06:18:10,992 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 06:18:10,994 INFO Payment required: $0.2500 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 06:18:11,402 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 06:18:27,414 INFO Derived wallet public address: 0xf150e26aD15580bA21A2E1A346b3CA3450127142
+2026-04-28 06:18:27,414 INFO === Purchasing WK datasets (date=2026-04-28) ===
+2026-04-28 06:18:27,415 INFO Fetching: https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl
+2026-04-28 06:18:28,069 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 06:18:28,070 INFO Payment required: $0.2500 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 06:18:28,420 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 06:18:29,835 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-agent-cards-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 06:18:29,977 INFO Paid $0.2500, downloaded 0 bytes → wk_x402-agent-cards_2026-04-28T06.jsonl
+2026-04-28 06:18:30,641 WARNING sync Pulse for x402-agent-cards-latest.jsonl exited 1 (non-fatal)
+2026-04-28 06:18:30,644 INFO   x402-agent-cards: 0 records
+2026-04-28 06:18:30,645 INFO Fetching: https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl
+2026-04-28 06:18:31,004 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 06:18:31,005 INFO Payment required: $0.2500 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 06:18:31,315 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 06:18:32,473 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-mcp-infrastructure-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 06:18:32,582 INFO Paid $0.2500, downloaded 0 bytes → wk_x402-mcp-infrastructure_2026-04-28T06.jsonl
+2026-04-28 06:18:32,923 WARNING sync Pulse for x402-mcp-infrastructure-latest.jsonl exited 1 (non-fatal)
+2026-04-28 06:18:32,926 INFO   x402-mcp-infrastructure: 0 records
+2026-04-28 06:18:32,927 INFO Fetching: https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl
+2026-04-28 06:18:33,193 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl "HTTP/1.1 402 Payment Required"
+2026-04-28 06:18:33,193 INFO Payment required: $0.5000 USDC to 0xFEB27852DAc5a9449B0fECf4a1D98Ecf76F0c24B
+2026-04-28 06:18:33,483 INFO HTTP Request: POST https://mainnet.base.org "HTTP/1.1 200 OK"
+2026-04-28 06:18:34,481 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-wellknown-overview-latest.jsonl "HTTP/1.1 200 OK"
+2026-04-28 06:18:34,732 INFO Paid $0.5000, downloaded 989 bytes → wk_x402-wellknown-overview_2026-04-28T06.jsonl
+2026-04-28 06:18:35,075 WARNING sync Pulse for x402-wellknown-overview-latest.jsonl exited 1 (non-fatal)
+2026-04-28 06:18:35,076 INFO   x402-wellknown-overview: 4 records
+2026-04-28 06:18:35,077 INFO Fetching: https://well-knowns.resolved.sh/data/x402-new-activity.jsonl
+2026-04-28 06:18:35,329 INFO HTTP Request: GET https://well-knowns.resolved.sh/data/x402-new-activity.jsonl "HTTP/1.1 404 Not Found"
+2026-04-28 06:18:35,331 WARNING Not found (404): https://well-knowns.resolved.sh/data/x402-new-activity.jsonl — WK dataset for this date may not exist yet
+2026-04-28 06:18:35,333 INFO   x402-new-activity: 0 records (cached for future enrichment)
+2026-04-28 06:18:35,334 INFO === Loading DA company index ===
+2026-04-28 06:18:35,355 INFO   436 DA company records
+2026-04-28 06:18:35,356 INFO === Enriching DA records with WK signals ===
+2026-04-28 06:18:35,357 INFO   agent-card matches: 0
+2026-04-28 06:18:35,357 INFO   mcp matches:        0
+2026-04-28 06:18:35,358 INFO   top-100k matches:   19
+2026-04-28 06:18:35,407 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index.jsonl
+2026-04-28 06:18:35,445 INFO Wrote 436 rows → public/flat_x402_ecosystem_full_index_2026-04-28.jsonl
+2026-04-28 06:18:35,487 INFO Wrote 436 rows → public/x402_ecosystem_full_index.jsonl
+2026-04-28 06:18:35,493 INFO Wrote 113 rows → public/flat_x402_ecosystem_merged_only.jsonl
+2026-04-28 06:18:35,499 INFO Wrote 113 rows → public/x402_ecosystem_merged_only.jsonl
+2026-04-28 06:18:35,505 INFO Wrote 40 rows → public/flat_x402_ecosystem_new_this_week.jsonl
+2026-04-28 06:18:35,512 INFO Wrote 40 rows → public/x402_ecosystem_new_this_week.jsonl
+2026-04-28 06:18:35,513 INFO === Uploading enriched listings to resolved.sh ===
+2026-04-28 06:18:35,513 INFO $ /usr/bin/python /sessions/tender-beautiful-gauss/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/tender-beautiful-gauss/mnt/double-agent/public/x402_ecosystem_full_index.jsonl 2.00
+2026-04-28 06:18:36,726 INFO $ /usr/bin/python /sessions/tender-beautiful-gauss/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/tender-beautiful-gauss/mnt/double-agent/public/x402_ecosystem_merged_only.jsonl 1.00
+2026-04-28 06:18:37,667 INFO $ /usr/bin/python /sessions/tender-beautiful-gauss/mnt/double-agent/scripts/resolved_sh.py upload e8592c18-9052-47b5-bfa3-bfe699193d0e /sessions/tender-beautiful-gauss/mnt/double-agent/public/x402_ecosystem_new_this_week.jsonl 0.50
+2026-04-28 06:18:38,598 INFO === Emitting Pulse event ===
+2026-04-28 06:18:38,599 INFO $ /usr/bin/python /sessions/tender-beautiful-gauss/mnt/double-agent/scripts/resolved_sh.py emit-event agentagent task_completed {"task_type": "sync", "duration_seconds": 11.3, "success": true}
+2026-04-28 06:18:39,002 INFO === Enrichment loop complete in 11.7s ===
